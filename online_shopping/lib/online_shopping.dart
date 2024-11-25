@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:online_shopping/core/routing/app_routes.dart';
+import 'package:online_shopping/core/routing/routes.dart';
 
 class OnlineShopping extends StatelessWidget {
-  const OnlineShopping({super.key});
+  final AppRoutes appRouter;
+  OnlineShopping({super.key, required this.appRouter});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Online shopping',
-      home: null,
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Online shopping',
+        onGenerateRoute: appRouter.gnerateRoute,
+        initialRoute: Routes.splash,
+      ),
     );
   }
 }
