@@ -1,20 +1,31 @@
 Online Shopping Application
+The Online Shopping Application provides a seamless platform for customers to explore and purchase products while equipping admins with robust tools for inventory management and sales analysis.
 
-The Online Shopping application offers a seamless and user-friendly platform for customers to explore and purchase products while providing robust functionalities for admins to manage inventory and monitor sales. Key features include:
-
-Customer Features:
-Sign-Up & Login: Users can create accounts or log in with their credentials, utilizing "Remember Me" and "Forget Password" recovery features.
-Browsing & Navigation: Easily navigate through various product categories and explore detailed listings.
-Advanced Search: Search for products using text, voice input, or barcode scanning through the camera.
-Shopping Cart Management: Add multiple products to the cart, and update or remove items. Customers can also adjust product quantities and view the total cost before submitting the order.
-Delivery Location: Determine delivery location using GPS or Google Maps integration for accurate and hassle-free delivery.
-Personalization: Define the customer’s birthdate using a calendar, enabling tailored recommendations or special offers.
-Admin Functionalities:
-Product Management: Add, delete, or edit product details and categories. Admins can specify product stock quantities to ensure accurate inventory management.
-Transaction Reports: Generate detailed reports of all transactions made by users on specific dates, aiding in sales analysis and operational insights.
-Feedback & Ratings: Receive feedback and ratings from customers for continuous improvement in services and products.
-Sales Analytics: Produce charts showing best-selling products, empowering admins to optimize their offerings and marketing strategies.
-Database Management:
-The application leverages Firebase to ensure secure, real-time data storage and management for both user and admin functionalities, ensuring a smooth and efficient shopping experience.
-
-This platform combines convenience, efficiency, and insightful data analytics to create a comprehensive e-commerce solution for customers and administrators alike.
+Key Features
+Customer Features
+Sign-Up & Login:
+Secure user authentication with "Remember Me" and "Forget Password" recovery.
+Browsing & Navigation:
+Intuitive navigation through product categories and detailed listings.
+Advanced Search:
+Search products using text, voice, or barcode scanning.
+Shopping Cart Management:
+Add, remove, and update product quantities in the cart.
+View order totals before submission.
+Delivery Location:
+GPS/Google Maps integration for accurate delivery locations.
+Personalization:
+Set birthdates via a calendar for tailored experiences.
+Admin Functionalities
+Product Management:
+Add, edit, or delete products and categories.
+Manage product stock quantities.
+Transaction Reports:
+Generate detailed transaction reports for specific dates.
+Feedback & Ratings:
+Collect and analyze customer feedback and order ratings.
+Sales Analytics:
+Produce charts showcasing best-selling products.
+Database Management
+Powered by Firebase for real-time, secure data storage and seamless application functionality.
+This application delivers a comprehensive e-commerce experience, combining convenience, efficiency, and powerful analytics for both customers and administrators.
