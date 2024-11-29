@@ -46,9 +46,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               if (value == null || value.isEmpty) {
                 return 'Please enter your email';
               }
-              if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                return 'Enter a valid email address';
-              }
+
               return null;
             },
           ),
@@ -82,9 +80,8 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             },
           ),
           SizedBox(
-            height: 10.h,
+            height: 50.h,
           ),
-          //login button
 
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -101,7 +98,11 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           SizedBox(
             height: 10.h,
           ),
-          LoginButton(),
+          //login button
+          LoginButton(
+            emailController: _emailController,
+            passwordController: _passwordController,
+          ),
           SizedBox(
             height: 10.h,
           ),
@@ -110,7 +111,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             children: [
               TextButton(
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, Routes.onboarding);
+                  Navigator.pushReplacementNamed(context, Routes.home);
                 },
                 child: Text(
                   'Don’t haven an account ? Signup',

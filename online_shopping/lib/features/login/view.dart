@@ -36,7 +36,7 @@ class LoginScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 100.h,
+                  height: 50.h,
                 ),
                 EmailAndPassword()
               ],
