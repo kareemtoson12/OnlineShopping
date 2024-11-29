@@ -95,8 +95,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(
-                          context, Routes.onboarding);
+                      Navigator.pushReplacementNamed(context, Routes.login);
                     },
                     child: Text(
                       'Skip',

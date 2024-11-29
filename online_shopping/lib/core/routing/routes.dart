@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:online_shopping/core/routing/app_routes.dart';
+import 'package:online_shopping/features/login/view.dart';
 import 'package:online_shopping/features/onboarding/view.dart';
-import 'package:online_shopping/features/splash/screen.dart';
+import 'package:online_shopping/features/splash/view.dart';
 
 class AppRoutes {
   Route? gnerateRoute(RouteSettings screen) {
@@ -14,6 +15,10 @@ class AppRoutes {
       case Routes.onboarding:
         return MaterialPageRoute(
             builder: (context) => const OnboardingScreen());
+    }
+    switch (screen.name) {
+      case Routes.login:
+        return MaterialPageRoute(builder: (context) => const LoginScreen());
     }
     return null;
   }

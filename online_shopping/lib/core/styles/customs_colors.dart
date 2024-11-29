@@ -7,4 +7,5 @@ class CustomsColros {
   static const Color darkgray = Color(0xff6D6D6D);
   static const Color offPrimaryColor = Color(0xffEBE8FF);
   static const Color yellowColor = Color(0xffFFC107);
+  static const Color secondColor = Color(0xffe4d5ff);
 }
