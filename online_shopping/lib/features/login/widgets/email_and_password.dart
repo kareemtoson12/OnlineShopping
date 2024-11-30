@@ -87,7 +87,10 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacementNamed(
+                      context, Routes.forgetPassword);
+                },
                 child: Text(
                   'Forgot Password?',
                   style: AppTextStyles.fontForLabel,

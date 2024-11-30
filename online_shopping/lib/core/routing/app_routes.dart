@@ -4,4 +4,5 @@ class Routes {
   static const String login = '/LoginScreen';
   static const String userCheacking = '/AuthGate';
   static const String home = '/Homescreen';
+  static const String forgetPassword = '/ForgetPassword';
 }

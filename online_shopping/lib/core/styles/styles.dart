@@ -26,6 +26,11 @@ class AppTextStyles {
     fontWeight: FontWeight.w500,
     color: Colors.black,
   );
+  static TextStyle font18gray = TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w500,
+    color: Colors.grey,
+  );
   static TextStyle fontForLabelWithPrimaryColor = TextStyle(
     fontSize: 18.sp,
     fontWeight: FontWeight.w500,
