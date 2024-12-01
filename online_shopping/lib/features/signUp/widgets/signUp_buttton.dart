@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_shopping/core/routing/app_routes.dart';
 import 'package:online_shopping/core/styles/customs_colors.dart';
 import 'package:online_shopping/core/styles/styles.dart';
-import 'package:online_shopping/features/login/cubit/login_cubit.dart';
 import 'package:online_shopping/features/signUp/cubit/sign_up_cubit.dart';
 
-class SignUpButtton extends StatelessWidget {
+class SignUpButton extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final TextEditingController phoneNumberController;
@@ -16,7 +14,7 @@ class SignUpButtton extends StatelessWidget {
   final TextEditingController lastNameController;
   final TextEditingController userNameController;
 
-  const SignUpButtton({
+  const SignUpButton({
     super.key,
     required this.emailController,
     required this.passwordController,
@@ -39,7 +37,7 @@ class SignUpButtton extends StatelessWidget {
         } else if (state is SignUpSucess) {
           Navigator.of(context).pop(); // Close the loading dialog
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Account created  Successful')),
+            const SnackBar(content: Text('Account created successfully')),
           );
           Navigator.pushReplacementNamed(context, Routes.customNaivBar);
         } else if (state is SignUpError) {
@@ -54,13 +52,33 @@ class SignUpButtton extends StatelessWidget {
           onTap: () {
             final email = emailController.text.trim();
             final password = passwordController.text.trim();
-            if (email.isNotEmpty && password.isNotEmpty) {
-              context.read<SignUpCubit>().signUp(email, password);
-            } else {
+            final phoneNumber = phoneNumberController.text.trim();
+            final firstName = firstNameController.text.trim();
+            final lastName = lastNameController.text.trim();
+            final userName = userNameController.text.trim();
+
+            // Validate fields
+            if (email.isEmpty ||
+                password.isEmpty ||
+                phoneNumber.isEmpty ||
+                firstName.isEmpty ||
+                lastName.isEmpty ||
+                userName.isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Please fill in all fields')),
               );
+              return;
             }
+
+            // Trigger sign-up with additional data
+            context.read<SignUpCubit>().signUp(
+                  email: email,
+                  password: password,
+                  phoneNumber: phoneNumber,
+                  firstName: firstName,
+                  lastName: lastName,
+                  userName: userName,
+                );
           },
           child: Container(
             width: 190.w,

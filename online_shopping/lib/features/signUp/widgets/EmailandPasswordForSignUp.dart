@@ -207,7 +207,7 @@ class _EmailandPasswordForSignUpState extends State<EmailandPasswordForSignUp> {
 
           SizedBox(height: 10.h),
           // Login button
-          SignUpButtton(
+          SignUpButton(
             emailController: _emailController,
             firstNameController: _firstNameController,
             lastNameController: _LastNameController,
