@@ -17,4 +17,18 @@ class AuthService {
       throw Exception(e.code);
     }
   }
+
+//Register user in
+  Future<UserCredential> registerUserWithEmailandPassword(
+      String email, String password) async {
+    try {
+      // register user
+      UserCredential userCredential = await _firebaseAuth
+          .createUserWithEmailAndPassword(email: email, password: password);
+      return userCredential;
+    } on FirebaseAuthException catch (e) {
+      // catch and throw Firebase authentication exceptions
+      throw Exception(e.code);
+    }
+  }
 }

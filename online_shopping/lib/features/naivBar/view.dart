@@ -25,19 +25,19 @@ class CustomNavBar extends StatelessWidget {
         PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.home),
           title: "Home",
-          activeColorPrimary: CustomsColros.offPrimaryColor,
+          activeColorPrimary: Colors.white,
           inactiveColorPrimary: CupertinoColors.systemGrey,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.cart),
           title: "cart",
-          activeColorPrimary: CustomsColros.offPrimaryColor,
+          activeColorPrimary: Colors.white,
           inactiveColorPrimary: CupertinoColors.systemGrey,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.person),
           title: "profile",
-          activeColorPrimary: CustomsColros.offPrimaryColor,
+          activeColorPrimary: Colors.white,
           inactiveColorPrimary: CupertinoColors.systemGrey,
         ),
       ];

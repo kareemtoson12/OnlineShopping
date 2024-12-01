@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:online_shopping/features/home/view.dart';
+
 import 'package:online_shopping/features/login/view.dart';
+import 'package:online_shopping/features/naivBar/view.dart';
 
 class AuthGate extends StatelessWidget {
   const AuthGate({super.key});
@@ -14,7 +15,7 @@ class AuthGate extends StatelessWidget {
         builder: (context, snapshot) {
           //if user logeed in
           if (snapshot.hasData) {
-            return const Homescreen();
+            return CustomNavBar();
           }
           //if  use not logged in
 

@@ -37,9 +37,9 @@ class Homescreen extends StatelessWidget {
                 Text(
                   'Popular Categories',
                   style: AppTextStyles.font25blackRegular
-                      .copyWith(fontSize: 28.dg),
+                      .copyWith(fontSize: 28.dg, color: Colors.white),
                 ),
-                SizedBox(height: 01.h),
+                SizedBox(height: 10.h),
                 CategoriesScreen()
               ],
             ),

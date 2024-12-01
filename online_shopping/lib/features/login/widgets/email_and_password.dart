@@ -114,7 +114,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             children: [
               TextButton(
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, Routes.home);
+                  Navigator.pushReplacementNamed(context, Routes.signUp);
                 },
                 child: Text(
                   'Don’t haven an account ? Signup',

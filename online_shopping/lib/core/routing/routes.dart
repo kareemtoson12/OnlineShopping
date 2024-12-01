@@ -7,6 +7,7 @@ import 'package:online_shopping/features/home/view.dart';
 import 'package:online_shopping/features/login/view.dart';
 import 'package:online_shopping/features/naivBar/view.dart';
 import 'package:online_shopping/features/onboarding/view.dart';
+import 'package:online_shopping/features/signUp/view.dart';
 import 'package:online_shopping/features/splash/view.dart';
 
 class AppRoutes {
@@ -39,6 +40,10 @@ class AppRoutes {
     switch (screen.name) {
       case Routes.customNaivBar:
         return MaterialPageRoute(builder: (context) => CustomNavBar());
+    }
+    switch (screen.name) {
+      case Routes.signUp:
+        return MaterialPageRoute(builder: (context) => SignUpScreen());
     }
     return null;
   }

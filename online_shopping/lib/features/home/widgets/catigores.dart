@@ -43,8 +43,10 @@ class CategoriesScreen extends StatelessWidget {
                     width: 70.w,
                   ),
                 ),
-                SizedBox(height: 5.h),
-                Text(category['title'], style: AppTextStyles.fontForLabel),
+                SizedBox(height: 10.h),
+                Text(category['title'],
+                    style: AppTextStyles.fontForLabel
+                        .copyWith(color: Colors.white)),
               ],
             ),
           );

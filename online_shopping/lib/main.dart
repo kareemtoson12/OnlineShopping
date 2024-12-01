@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_shopping/core/routing/routes.dart';
 import 'package:online_shopping/core/services/auth_service.dart';
 import 'package:online_shopping/features/login/cubit/login_cubit.dart';
+import 'package:online_shopping/features/signUp/cubit/sign_up_cubit.dart';
 import 'package:online_shopping/firebase_options.dart';
 import 'package:online_shopping/online_shopping.dart';
 
@@ -15,7 +16,7 @@ void main() async {
   runApp(MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LoginCubit(authService)),
-        // BlocProvider(create: (context) => AnotherCubit()),
+        BlocProvider(create: (context) => SignUpCubit(authService)),
       ],
       child: OnlineShopping(
         appRouter: AppRoutes(),
