@@ -13,7 +13,7 @@ class Homescreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(280.h),
+        preferredSize: Size.fromHeight(270.h),
         child: AppBar(
           backgroundColor: CustomsColros.primaryColor,
           shape: const RoundedRectangleBorder(
