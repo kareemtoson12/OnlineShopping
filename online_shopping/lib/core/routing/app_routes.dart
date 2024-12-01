@@ -5,4 +5,5 @@ class Routes {
   static const String userCheacking = '/AuthGate';
   static const String home = '/Homescreen';
   static const String forgetPassword = '/ForgetPassword';
+  static const String customNaivBar = '/CustomNaivBar';
 }

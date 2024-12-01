@@ -12,18 +12,33 @@ class AppTextStyles {
     color: Colors.black,
   );
   static TextStyle font25blacSubTitle = TextStyle(
-    fontSize: 15.sp,
+    fontSize: 17.sp,
     fontWeight: FontWeight.w400,
     color: CustomsColros.white,
+  );
+  static TextStyle font20blacSubTitle = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
   );
   static TextStyle font30blackTitle = TextStyle(
     fontSize: 30.sp,
     fontWeight: FontWeight.w500,
     color: CustomsColros.white,
   );
+  static TextStyle font25blod = TextStyle(
+    fontSize: 25.sp,
+    fontWeight: FontWeight.w500,
+    color: CustomsColros.white,
+  );
   static TextStyle fontForLabel = TextStyle(
     fontSize: 18.sp,
     fontWeight: FontWeight.w500,
+    color: Colors.black,
+  );
+  static TextStyle fontForSmallLabel = TextStyle(
+    fontSize: 15.sp,
+    fontWeight: FontWeight.bold,
     color: Colors.black,
   );
   static TextStyle font18gray = TextStyle(

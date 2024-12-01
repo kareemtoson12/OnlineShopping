@@ -5,6 +5,7 @@ import 'package:online_shopping/core/services/auth_gate.dart';
 import 'package:online_shopping/features/forgetPassword/view.dart';
 import 'package:online_shopping/features/home/view.dart';
 import 'package:online_shopping/features/login/view.dart';
+import 'package:online_shopping/features/naivBar/view.dart';
 import 'package:online_shopping/features/onboarding/view.dart';
 import 'package:online_shopping/features/splash/view.dart';
 
@@ -34,6 +35,10 @@ class AppRoutes {
     switch (screen.name) {
       case Routes.forgetPassword:
         return MaterialPageRoute(builder: (context) => ForgetPassword());
+    }
+    switch (screen.name) {
+      case Routes.customNaivBar:
+        return MaterialPageRoute(builder: (context) => CustomNavBar());
     }
     return null;
   }

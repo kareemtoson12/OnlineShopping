@@ -5,7 +5,7 @@ import 'package:online_shopping/core/routing/routes.dart';
 
 class OnlineShopping extends StatelessWidget {
   final AppRoutes appRouter;
-  OnlineShopping({super.key, required this.appRouter});
+  const OnlineShopping({super.key, required this.appRouter});
 
   @override
   Widget build(BuildContext context) {
