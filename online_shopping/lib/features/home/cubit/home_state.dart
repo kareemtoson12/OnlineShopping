@@ -6,9 +6,14 @@ class HomeIntial extends HomeState {}
 
 class HomeCategoriesLoading extends HomeState {}
 
-class HomeCategoriesSucess extends HomeState {}
+class HomeCategoriesSuccess extends HomeState {
+  final List<CategoryModel> categories;
+
+  HomeCategoriesSuccess(this.categories);
+}
 
 class HomeCategoriesError extends HomeState {
-  final String message;
-  HomeCategoriesError(this.message);
+  final String errorMessage;
+
+  HomeCategoriesError(this.errorMessage);
 }

@@ -1,57 +1,81 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_shopping/core/styles/customs_colors.dart';
 import 'package:online_shopping/core/styles/styles.dart';
+import 'package:online_shopping/features/home/cubit/home_cubit.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  final List<Map<String, dynamic>> categories = [
-    {'icon': 'assets/electronics.png', 'title': 'Electronics'},
-    {'icon': 'assets/dress.png', 'title': 'Clothes'},
-    {'icon': 'assets/handyman.png', 'title': 'Furniture'},
-    {'icon': 'assets/sneakers.png', 'title': 'Shoes'},
-  ];
-
-  CategoriesScreen({super.key});
+  const CategoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 120.h, // Adjust height for the horizontal list
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal, // Horizontal scrolling
-        itemCount: categories.length,
-        itemBuilder: (context, index) {
-          final category = categories[index];
-          return GestureDetector(
-            onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Tapped on ${category['title']}')),
-              );
-            },
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: CustomsColros.white,
-                      borderRadius: BorderRadius.circular(75.dg)),
-                  margin: EdgeInsets.symmetric(horizontal: 9.w),
-                  padding: EdgeInsets.symmetric(horizontal: 9.w),
-                  width: 70.w, // Adjust width of each item
-                  child: Image.asset(
-                    category['icon'],
-                    height: 70.h,
-                    width: 70.w,
+    // final homeCubit = context.read<HomeCubit>();
+
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        if (state is HomeCategoriesLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state is HomeCategoriesSuccess) {
+          final categories = state.categories;
+
+          return SizedBox(
+            height: 120.h,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: categories.length,
+              itemBuilder: (context, index) {
+                final category = categories[index];
+                return GestureDetector(
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Tapped on ${category.name}')),
+                    );
+                  },
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 70.h,
+                        width: 70.w,
+                        decoration: BoxDecoration(
+                          color: CustomsColros.white,
+                          borderRadius: BorderRadius.circular(75.r),
+                        ),
+                        margin: EdgeInsets.symmetric(horizontal: 9.w),
+                        padding: EdgeInsets.symmetric(horizontal: 9.w),
+                        child: Image.network(
+                          category.image,
+                          height: 50.h,
+                          width: 50.w,
+                        ),
+                      ),
+                      SizedBox(height: 10.h),
+                      Text(
+                        category.name,
+                        style: AppTextStyles.fontForLabel
+                            .copyWith(color: Colors.white),
+                      ),
+                    ],
                   ),
-                ),
-                SizedBox(height: 10.h),
-                Text(category['title'],
-                    style: AppTextStyles.fontForLabel
-                        .copyWith(color: Colors.white)),
-              ],
+                );
+              },
             ),
           );
-        },
-      ),
+        } else if (state is HomeCategoriesError) {
+          return Center(
+            child: Text(
+              'Failed to load categories: ${state.errorMessage}',
+              style: TextStyle(color: Colors.red),
+            ),
+          );
+        } else {
+          return Center(
+            child: Text('No categories to display.'),
+          );
+        }
+      },
     );
   }
 }
