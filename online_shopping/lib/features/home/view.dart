@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:online_shopping/core/services/auth_service.dart';
 import 'package:online_shopping/core/styles/customs_colors.dart';
 import 'package:online_shopping/core/styles/styles.dart';
 import 'package:online_shopping/features/home/widgets/catigores.dart';
@@ -11,9 +12,11 @@ class Homescreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthService auth = AuthService();
+
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(270.h),
+        preferredSize: Size.fromHeight(290.h),
         child: AppBar(
           backgroundColor: CustomsColros.primaryColor,
           shape: const RoundedRectangleBorder(
@@ -31,6 +34,36 @@ class Homescreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Use FutureBuilder to fetch and display the username
+                FutureBuilder<String?>(
+                  future: auth.getUserName(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Text(
+                        'Loading...',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      );
+                    } else if (snapshot.hasError) {
+                      return const Text(
+                        'Error loading username',
+                        style: TextStyle(color: Colors.red, fontSize: 18),
+                      );
+                    } else if (snapshot.hasData && snapshot.data != null) {
+                      return Text(
+                        'Hello, ${snapshot.data}!',
+                        style: AppTextStyles.font18gray.copyWith(
+                          color: Colors.white,
+                        ),
+                      );
+                    } else {
+                      return const Text(
+                        'Hello, Guest!',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      );
+                    }
+                  },
+                ),
+                SizedBox(height: 10.h),
                 // Search Bar Added Here
                 searchWidget(),
                 SizedBox(height: 10.h),
@@ -55,7 +88,7 @@ class Homescreen extends StatelessWidget {
               SizedBox(
                 height: 10.dg,
               ),
-              //sale off
+              // Sale off banner
               SizedBox(
                 width: double.infinity,
                 child: Padding(
@@ -72,14 +105,14 @@ class Homescreen extends StatelessWidget {
                   ),
                   TextButton(
                     child: Text(
-                      'view all',
+                      'View all',
                       style: AppTextStyles.font18gray,
                     ),
                     onPressed: () {},
                   ),
                 ],
               ),
-              //popular products
+              // Popular products grid
               ProductGridView(),
             ],
           ),

@@ -25,19 +25,19 @@ class CustomNavBar extends StatelessWidget {
         PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.home),
           title: "Home",
-          activeColorPrimary: Colors.white,
+          activeColorPrimary: CustomsColros.primaryColor,
           inactiveColorPrimary: CupertinoColors.systemGrey,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.cart),
           title: "cart",
-          activeColorPrimary: Colors.white,
+          activeColorPrimary: CustomsColros.primaryColor,
           inactiveColorPrimary: CupertinoColors.systemGrey,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.person),
           title: "profile",
-          activeColorPrimary: Colors.white,
+          activeColorPrimary: CustomsColros.primaryColor,
           inactiveColorPrimary: CupertinoColors.systemGrey,
         ),
       ];
@@ -52,7 +52,7 @@ class CustomNavBar extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       stateManagement: true,
       hideNavigationBarWhenKeyboardAppears: true,
-      backgroundColor: CustomsColros.primaryColor,
+      backgroundColor: CustomsColros.white,
       isVisible: true,
       animationSettings: const NavBarAnimationSettings(
         navBarItemAnimation: ItemAnimationSettings(

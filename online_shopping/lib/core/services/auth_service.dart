@@ -49,4 +49,14 @@ class AuthService {
       throw Exception('Failed to save user data: $e');
     }
   }
+
+//get useName
+  Future<String?> getUserName() async {
+    final user = _firebaseAuth.currentUser;
+    if (user != null) {
+      final userDoc = await _firestore.collection('users').doc(user.uid).get();
+      return userDoc.data()?['userName'] as String?;
+    }
+    return null;
+  }
 }
