@@ -69,7 +69,7 @@ class _ProfileState extends State<Profile> {
                       style: AppTextStyles.font25blackRegular,
                     ),
                     SizedBox(
-                      height: 20.h,
+                      height: 120.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -88,7 +88,7 @@ class _ProfileState extends State<Profile> {
                       ],
                     ),
                     SizedBox(
-                      height: 10.h,
+                      height: 30.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -105,6 +105,9 @@ class _ProfileState extends State<Profile> {
                           style: AppTextStyles.font20blacSubTitle,
                         ),
                       ],
+                    ),
+                    SizedBox(
+                      height: 30.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -123,7 +126,7 @@ class _ProfileState extends State<Profile> {
                       ],
                     ),
                     SizedBox(
-                      height: 10.h,
+                      height: 30.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -133,7 +136,7 @@ class _ProfileState extends State<Profile> {
                           style: AppTextStyles.font18gray,
                         ),
                         SizedBox(
-                          width: 100.w,
+                          width: 80.w,
                         ),
                         GestureDetector(
                           onTap: () => _selectDate(context),
@@ -142,7 +145,7 @@ class _ProfileState extends State<Profile> {
                                 horizontal: 10.w, vertical: 5.h),
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: CustomsColros.gray,
+                                color: CustomsColros.primaryColor,
                                 width: 1.4,
                               ),
                               borderRadius: BorderRadius.circular(10.r),
@@ -151,7 +154,7 @@ class _ProfileState extends State<Profile> {
                               _selectedDate == null
                                   ? 'Select date'
                                   : '${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}',
-                              style: AppTextStyles.font18gray,
+                              style: AppTextStyles.font20blacSubTitle,
                             ),
                           ),
                         )
