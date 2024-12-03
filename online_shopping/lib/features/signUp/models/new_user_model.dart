@@ -15,6 +15,18 @@ class NewUserModel {
     required this.email,
   });
 
+// Convert Firestore document data (Map) to NewUserModel instance
+  factory NewUserModel.fromJson(Map<String, dynamic> json) {
+    return NewUserModel(
+      id: json['id'] as String,
+      firstName: json['firstName'] as String,
+      lastName: json['lastName'] as String,
+      phoneNumber: json['phoneNumber'] as String,
+      userName: json['userName'] as String,
+      email: json['email'] as String,
+    );
+  }
+
   // Convert model to Firestore-compatible map
   Map<String, dynamic> toMap() {
     return {

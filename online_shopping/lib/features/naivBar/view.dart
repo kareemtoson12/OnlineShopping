@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:online_shopping/core/styles/customs_colors.dart';
+import 'package:online_shopping/features/profile/view.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:online_shopping/features/home/view.dart';
 
@@ -16,7 +17,7 @@ class CustomNavBar extends StatelessWidget {
       return [
         const Homescreen(), // Home screen
         const Center(child: Text("Middle Screen")), // Placeholder
-        const Center(child: Text("profile Screen")), // Placeholder
+        Profile()
       ];
     }
 
@@ -26,19 +27,19 @@ class CustomNavBar extends StatelessWidget {
           icon: const Icon(CupertinoIcons.home),
           title: "Home",
           activeColorPrimary: CustomsColros.primaryColor,
-          inactiveColorPrimary: CupertinoColors.systemGrey,
+          inactiveColorPrimary: Colors.black,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.cart),
           title: "cart",
           activeColorPrimary: CustomsColros.primaryColor,
-          inactiveColorPrimary: CupertinoColors.systemGrey,
+          inactiveColorPrimary: Colors.black,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.person),
           title: "profile",
           activeColorPrimary: CustomsColros.primaryColor,
-          inactiveColorPrimary: CupertinoColors.systemGrey,
+          inactiveColorPrimary: Colors.black,
         ),
       ];
     }

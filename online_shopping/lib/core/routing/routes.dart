@@ -7,6 +7,7 @@ import 'package:online_shopping/features/home/view.dart';
 import 'package:online_shopping/features/login/view.dart';
 import 'package:online_shopping/features/naivBar/view.dart';
 import 'package:online_shopping/features/onboarding/view.dart';
+import 'package:online_shopping/features/profile/view.dart';
 import 'package:online_shopping/features/signUp/view.dart';
 import 'package:online_shopping/features/splash/view.dart';
 
@@ -44,6 +45,10 @@ class AppRoutes {
     switch (screen.name) {
       case Routes.signUp:
         return MaterialPageRoute(builder: (context) => SignUpScreen());
+    }
+    switch (screen.name) {
+      case Routes.profile:
+        return MaterialPageRoute(builder: (context) => Profile());
     }
     return null;
   }

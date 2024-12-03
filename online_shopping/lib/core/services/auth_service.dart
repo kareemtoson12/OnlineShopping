@@ -68,4 +68,82 @@ class AuthService {
       throw Exception(e.code); // Re-throw exceptions
     }
   }
+
+//*******get user id**********
+  Future<String?> getUserId() async {
+    final user = _firebaseAuth.currentUser;
+    if (user != null) {
+      return user.uid;
+    }
+    return null;
+  }
+
+  //************ * fetch data using use id********************
+
+  Future<NewUserModel?> getUserById() async {
+    try {
+      // Fetch the current user ID asynchronously
+      String? userId = await getUserId();
+
+      if (userId == null) {
+        // If no user is signed in, return null
+        print('No user is signed in.');
+        return null;
+      }
+
+      // Fetch user document from the Firestore `users` collection
+      DocumentSnapshot<Map<String, dynamic>> userDoc =
+          await _firestore.collection('users').doc(userId).get();
+
+      if (userDoc.exists && userDoc.data() != null) {
+        // Convert the document data to a NewUserModel
+        return NewUserModel.fromJson(userDoc.data()!);
+      } else {
+        // User document not found
+        print('User not found in Firestore.');
+        return null;
+      }
+    } catch (e) {
+      // Log and rethrow the error for further handling
+      print('Error fetching user by ID: $e');
+      rethrow;
+    }
+  }
+
+//********update user data in the Firestore `users` collection*****
+  Future<void> updateUserData(NewUserModel updatedUser) async {
+    try {
+      await _firestore
+          .collection('users')
+          .doc(updatedUser.id)
+          .update(updatedUser.toMap());
+    } catch (e) {
+      throw Exception('Failed to update user data: $e');
+    }
+  }
+
+  ///** * Update a single field in the Firestore `users` collection**
+  Future<void> updateSingleField(Map<String, dynamic> json) async {
+    try {
+      await _firestore
+          .collection('users')
+          .doc(_firebaseAuth.currentUser?.uid)
+          .update(json);
+    } on FirebaseException catch (e) {
+      throw Exception(e.message ?? 'An error occurred while updating field.');
+    } catch (e) {
+      throw Exception('An unknown error occurred: $e');
+    }
+  }
+
+  //**Remove a user record from Firestore**
+  Future<void> removeUserRecord(String userId) async {
+    try {
+      await _firestore.collection('users').doc(userId).delete();
+    } on FirebaseException catch (e) {
+      throw Exception(e.message ?? 'An error occurred while deleting user.');
+    } catch (e) {
+      throw Exception('An unknown error occurred: $e');
+    }
+  }
 }

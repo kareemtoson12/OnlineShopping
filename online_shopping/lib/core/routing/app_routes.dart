@@ -7,4 +7,5 @@ class Routes {
   static const String forgetPassword = '/ForgetPassword';
   static const String customNaivBar = '/CustomNaivBar';
   static const String signUp = '/SignUpScreen';
+  static const String profile = '/Profile';
 }
