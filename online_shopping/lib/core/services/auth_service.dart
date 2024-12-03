@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:online_shopping/features/home/models/category_model.dart';
 import 'package:online_shopping/features/signUp/models/new_user_model.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+//*****Authentication */
 
   // Sign in user
   Future<UserCredential> signInWithEmailandPassword(
@@ -13,6 +16,15 @@ class AuthService {
       UserCredential userCredential = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
       return userCredential;
+    } on FirebaseAuthException catch (e) {
+      throw Exception(e.code); // Re-throw exceptions
+    }
+  }
+
+// Forget password
+  Future<void> forgetPassword(String email) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
       throw Exception(e.code); // Re-throw exceptions
     }
@@ -50,6 +62,8 @@ class AuthService {
     }
   }
 
+  //***********USER******
+
 //get useName
   Future<String?> getUserName() async {
     final user = _firebaseAuth.currentUser;
@@ -60,16 +74,7 @@ class AuthService {
     return null;
   }
 
-// Forget password
-  Future<void> forgetPassword(String email) async {
-    try {
-      await _firebaseAuth.sendPasswordResetEmail(email: email);
-    } on FirebaseAuthException catch (e) {
-      throw Exception(e.code); // Re-throw exceptions
-    }
-  }
-
-//*******get user id**********
+// get user id
   Future<String?> getUserId() async {
     final user = _firebaseAuth.currentUser;
     if (user != null) {
@@ -77,8 +82,6 @@ class AuthService {
     }
     return null;
   }
-
-  //************ * fetch data using use id********************
 
   Future<NewUserModel?> getUserById() async {
     try {
@@ -110,7 +113,6 @@ class AuthService {
     }
   }
 
-//********update user data in the Firestore `users` collection*****
   Future<void> updateUserData(NewUserModel updatedUser) async {
     try {
       await _firestore
@@ -122,7 +124,7 @@ class AuthService {
     }
   }
 
-  ///** * Update a single field in the Firestore `users` collection**
+  /// Update a single field in the Firestore `users` collection
   Future<void> updateSingleField(Map<String, dynamic> json) async {
     try {
       await _firestore
@@ -136,7 +138,7 @@ class AuthService {
     }
   }
 
-  //**Remove a user record from Firestore**
+  //Remove a user record from Firestore
   Future<void> removeUserRecord(String userId) async {
     try {
       await _firestore.collection('users').doc(userId).delete();
@@ -144,6 +146,20 @@ class AuthService {
       throw Exception(e.message ?? 'An error occurred while deleting user.');
     } catch (e) {
       throw Exception('An unknown error occurred: $e');
+    }
+  }
+
+//*********CATEGORY ********/
+
+//GET  ALL CATEGORIES
+  Future<List<CategoryModel>> getAllCategories() async {
+    try {
+      final snapshot = await _firestore.collection('categories').get();
+      return snapshot.docs
+          .map((doc) => CategoryModel.fromDocumentSnapshot(doc))
+          .toList();
+    } catch (e) {
+      throw Exception('Failed to get all categories: $e');
     }
   }
 }
