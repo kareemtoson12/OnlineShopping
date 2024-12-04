@@ -10,9 +10,9 @@ class ProductListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(body: BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
-        if (state is HomeProductsiesLoading) {
+        if (state is HomeCategoriesLoading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state is HomeProductsSuccess) {
+        } else if (state is HomeCategoriesSuccess) {
           final products = state.products;
           return ListView.builder(
             itemCount: products.length,
@@ -20,7 +20,7 @@ class ProductListScreen extends StatelessWidget {
               return ProductCard(product: products[index]);
             },
           );
-        } else if (state is HomeProductsError) {
+        } else if (state is HomeCategoriesError) {
           return Center(
             child: Text(
               'Error: ${state.errorMessage}',

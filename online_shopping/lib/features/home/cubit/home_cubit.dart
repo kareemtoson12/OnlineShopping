@@ -15,27 +15,27 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> fetchCategories() async {
     emit(HomeCategoriesLoading());
     try {
+      final products = await authService.getAllProducts();
       final categories = await authService.getAllCategories();
-      emit(HomeCategoriesSuccess(categories));
+      emit(HomeCategoriesSuccess(categories, products));
     } catch (e) {
       emit(HomeCategoriesError('Failed to load categories: $e'));
     }
   }
 
 //products
-
+/* 
   /// Fetch products from Firestore
   Future<void> fetchProducts() async {
-    emit(HomeProductsiesLoading());
+    emit(HomeCategoriesLoading());
     try {
       print('Fetching products...');
       final products = await authService.getAllProducts();
       print('Products fetched successfully: ${products.length}');
-      emit(HomeProductsSuccess(products));
+      emit(HomeCategoriesSuccess(products));
     } catch (e, stackTrace) {
       print('Error fetching products: $e');
       print('StackTrace: $stackTrace');
       emit(HomeProductsError('Failed to load products: $e'));
-    }
-  }
+    } */
 }

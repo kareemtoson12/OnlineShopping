@@ -9,8 +9,9 @@ class HomeCategoriesLoading extends HomeState {}
 
 class HomeCategoriesSuccess extends HomeState {
   final List<CategoryModel> categories;
+  final List<ProductModel> products;
 
-  HomeCategoriesSuccess(this.categories);
+  HomeCategoriesSuccess(this.categories, this.products);
 }
 
 class HomeCategoriesError extends HomeState {
@@ -20,7 +21,7 @@ class HomeCategoriesError extends HomeState {
 }
 
 // show products at homeScreen
-class HomeProductsiesLoading extends HomeState {}
+/* class HomeProductsiesLoading extends HomeState {}
 
 class HomeProductsSuccess extends HomeState {
   final List<ProductModel> products;
@@ -32,4 +33,4 @@ class HomeProductsError extends HomeState {
   final String errorMessage;
 
   HomeProductsError(this.errorMessage);
-}
+} */
