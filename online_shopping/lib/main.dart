@@ -22,9 +22,10 @@ void main() async {
         BlocProvider(create: (context) => SignUpCubit(authService)),
         BlocProvider(create: (context) => ForgetPasswordCubit(authService)),
         BlocProvider(
-            create: (context) => HomeCubit(authService)..fetchCategories()),
-        BlocProvider(
-            create: (context) => ProfileCubit(authService)..fetchUserProfile()),
+          create: (context) => HomeCubit(authService)
+            ..fetchCategories(), // Ensure this is called on initialization
+        ),
+        BlocProvider(create: (context) => ProfileCubit(authService)),
       ],
       child: OnlineShopping(
         appRouter: AppRoutes(),

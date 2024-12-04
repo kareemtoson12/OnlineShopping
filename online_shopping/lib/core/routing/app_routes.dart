@@ -8,4 +8,5 @@ class Routes {
   static const String customNaivBar = '/CustomNaivBar';
   static const String signUp = '/SignUpScreen';
   static const String profile = '/Profile';
+  static const String cart = '/CartPage';
 }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:online_shopping/features/home/models/category_model.dart';
+import 'package:online_shopping/features/home/models/product_model.dart';
 import 'package:online_shopping/features/signUp/models/new_user_model.dart';
 
 class AuthService {
@@ -170,6 +171,51 @@ class AuthService {
           .toList();
     } catch (e) {
       throw Exception('Failed to get all categories: $e');
+    }
+  }
+
+  //*********PRODUCTS********/
+
+  /// Get all products
+  Future<List<ProductModel>> getAllProducts() async {
+    try {
+      final snapshot = await _firestore.collection('Products').get();
+      return snapshot.docs
+          .map((doc) => ProductModel.fromDocumentSnapshot(doc))
+          .toList();
+    } catch (e) {
+      throw Exception('Failed to get all products: $e');
+    }
+  }
+
+  /// Add a new product
+  Future<void> addProduct(ProductModel product) async {
+    try {
+      await _firestore.collection('products').add(product.toJson());
+    } catch (e) {
+      throw Exception('Failed to add product: $e');
+    }
+  }
+
+  /// Update product details
+  Future<void> updateProduct(
+      String productId, ProductModel updatedProduct) async {
+    try {
+      await _firestore
+          .collection('products')
+          .doc(productId)
+          .update(updatedProduct.toJson());
+    } catch (e) {
+      throw Exception('Failed to update product: $e');
+    }
+  }
+
+  /// Delete a product
+  Future<void> deleteProduct(String productId) async {
+    try {
+      await _firestore.collection('products').doc(productId).delete();
+    } catch (e) {
+      throw Exception('Failed to delete product: $e');
     }
   }
 }

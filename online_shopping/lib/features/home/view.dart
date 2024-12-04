@@ -4,7 +4,7 @@ import 'package:online_shopping/core/services/auth_service.dart';
 import 'package:online_shopping/core/styles/customs_colors.dart';
 import 'package:online_shopping/core/styles/styles.dart';
 import 'package:online_shopping/features/home/widgets/catigores.dart';
-import 'package:online_shopping/features/home/widgets/popular_catigores.dart';
+import 'package:online_shopping/features/home/widgets/popular_products.dart';
 import 'package:online_shopping/features/home/widgets/search_bar.dart';
 
 class Homescreen extends StatelessWidget {
@@ -34,7 +34,6 @@ class Homescreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Use FutureBuilder to fetch and display the username
                 FutureBuilder<String?>(
                   future: auth.getUserName(),
                   builder: (context, snapshot) {
@@ -64,7 +63,6 @@ class Homescreen extends StatelessWidget {
                   },
                 ),
                 SizedBox(height: 10.h),
-                // Search Bar Added Here
                 searchWidget(),
                 SizedBox(height: 10.h),
                 Text(
@@ -80,15 +78,11 @@ class Homescreen extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              SizedBox(
-                height: 10.dg,
-              ),
-              // Sale off banner
+              SizedBox(height: 10.dg),
               SizedBox(
                 width: double.infinity,
                 child: Padding(
@@ -112,12 +106,14 @@ class Homescreen extends StatelessWidget {
                   ),
                 ],
               ),
-              // Popular products grid
-              ProductGridView(),
+              // Popular products grid with explicit height
+              Expanded(
+                child: ProductListScreen(), // Constraining its height
+              ),
             ],
           ),
         ),
-      )),
+      ),
     );
   }
 }

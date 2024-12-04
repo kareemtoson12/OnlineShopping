@@ -33,6 +33,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (context) => SignUpScreen());
       case Routes.profile:
         return MaterialPageRoute(builder: (context) => Profile());
+      case Routes.cart:
+        return MaterialPageRoute(builder: (context) => Profile());
       default:
         return null; // Handle unknown routes
     }
