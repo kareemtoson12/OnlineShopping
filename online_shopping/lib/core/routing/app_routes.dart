@@ -9,4 +9,6 @@ class Routes {
   static const String signUp = '/SignUpScreen';
   static const String profile = '/Profile';
   static const String cart = '/CartPage';
+  static const String productInfo = '/productInformationScreen';
+  static const String adminPanel = '/AdminPanel';
 }

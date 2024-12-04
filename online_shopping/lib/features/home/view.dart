@@ -97,17 +97,10 @@ class Homescreen extends StatelessWidget {
                     'Popular Products',
                     style: AppTextStyles.font25blackRegular,
                   ),
-                  TextButton(
-                    child: Text(
-                      'View all',
-                      style: AppTextStyles.font18gray,
-                    ),
-                    onPressed: () {},
-                  ),
                 ],
               ),
               // Popular products grid with explicit height
-              Expanded(
+              const Expanded(
                 child: ProductListScreen(), // Constraining its height
               ),
             ],

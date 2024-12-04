@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:online_shopping/core/styles/styles.dart';
 import 'package:online_shopping/features/home/cubit/home_cubit.dart';
-import 'package:online_shopping/features/home/models/product_model.dart';
+import 'package:online_shopping/features/product/models/product_model.dart';
 
 class ProductListScreen extends StatelessWidget {
-  const ProductListScreen({Key? key}) : super(key: key);
+  const ProductListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class ProductListScreen extends StatelessWidget {
           return Center(
             child: Text(
               'Error: ${state.errorMessage}',
-              style: TextStyle(color: Colors.red),
+              style: const TextStyle(color: Colors.red),
             ),
           );
         }
@@ -54,10 +55,11 @@ class ProductCard extends StatelessWidget {
               )
             : const Icon(Icons.image_not_supported),
         title: Text(product.title),
-        subtitle: Text('\$${product.price}'),
-        onTap: () {
-          // Add navigation or actions if needed
-        },
+        subtitle: Text(
+          '\$${product.price}',
+          style: AppTextStyles.font25blackRegular,
+        ),
+        onTap: () {},
       ),
     );
   }

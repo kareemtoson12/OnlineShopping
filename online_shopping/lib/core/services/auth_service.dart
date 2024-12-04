@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:online_shopping/features/home/models/category_model.dart';
-import 'package:online_shopping/features/home/models/product_model.dart';
+import 'package:online_shopping/features/product/models/product_model.dart';
 import 'package:online_shopping/features/signUp/models/new_user_model.dart';
 
 class AuthService {
@@ -21,6 +21,8 @@ class AuthService {
       throw Exception(e.code); // Re-throw exceptions
     }
   }
+
+//Sign in Admin
 
   //logout user
 

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:online_shopping/core/routing/app_routes.dart';
 import 'package:online_shopping/core/services/auth_gate.dart';
+import 'package:online_shopping/features/adminPanel/view.dart';
 import 'package:online_shopping/features/forgetPassword/view.dart';
 import 'package:online_shopping/features/home/view.dart';
 import 'package:online_shopping/features/login/view.dart';
 import 'package:online_shopping/features/naivBar/view.dart';
 import 'package:online_shopping/features/onboarding/view.dart';
+import 'package:online_shopping/features/product/view.dart';
 import 'package:online_shopping/features/profile/view.dart';
 import 'package:online_shopping/features/signUp/view.dart';
 import 'package:online_shopping/features/splash/view.dart';
@@ -35,6 +37,11 @@ class AppRoutes {
         return MaterialPageRoute(builder: (context) => Profile());
       case Routes.cart:
         return MaterialPageRoute(builder: (context) => Profile());
+      case Routes.productInfo:
+        return MaterialPageRoute(
+            builder: (context) => ProductInformationScreen());
+      case Routes.adminPanel:
+        return MaterialPageRoute(builder: (context) => AdminPanel());
       default:
         return null; // Handle unknown routes
     }

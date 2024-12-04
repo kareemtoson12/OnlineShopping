@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_shopping/core/routing/routes.dart';
 import 'package:online_shopping/core/services/auth_service.dart';
+import 'package:online_shopping/features/adminPanel/cubit/admin_login_cubit.dart';
 import 'package:online_shopping/features/forgetPassword/cubit/forget_password_cubit.dart';
 import 'package:online_shopping/features/home/cubit/home_cubit.dart';
 import 'package:online_shopping/features/login/cubit/login_cubit.dart';
@@ -22,10 +23,11 @@ void main() async {
         BlocProvider(create: (context) => SignUpCubit(authService)),
         BlocProvider(create: (context) => ForgetPasswordCubit(authService)),
         BlocProvider(
-          create: (context) => HomeCubit(authService)
-            ..fetchCategories(), // Ensure this is called on initialization
+          create: (context) => HomeCubit(authService)..fetchCategories(),
         ),
-        BlocProvider(create: (context) => ProfileCubit(authService)),
+        BlocProvider(
+            create: (context) => ProfileCubit(authService)..fetchUserProfile()),
+        BlocProvider(create: (context) => AdminLoginCubit()),
       ],
       child: OnlineShopping(
         appRouter: AppRoutes(),
