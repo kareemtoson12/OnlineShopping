@@ -26,6 +26,11 @@ class AppTextStyles {
     fontWeight: FontWeight.w500,
     color: CustomsColros.white,
   );
+  static TextStyle font30RedBlond = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w600,
+    color: Colors.red,
+  );
   static TextStyle font25blod = TextStyle(
     fontSize: 25.sp,
     fontWeight: FontWeight.w500,

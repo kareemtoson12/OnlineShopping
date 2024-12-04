@@ -16,8 +16,8 @@ class OnlineShopping extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Online shopping',
-        onGenerateRoute: appRouter.gnerateRoute,
-        initialRoute: Routes.customNaivBar,
+        onGenerateRoute: appRouter.generateRoute,
+        initialRoute: Routes.splash,
       ),
     );
   }

@@ -23,4 +23,13 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(ProfileError('Failed to load user data: $e'));
     }
   }
+
+  Future<void> logout() async {
+    try {
+      await authService.logUserOut();
+      emit(LogoutSucess());
+    } catch (e) {
+      emit(LogoutError('Logout failed: $e'));
+    }
+  }
 }

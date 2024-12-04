@@ -21,6 +21,16 @@ class AuthService {
     }
   }
 
+  //logout user
+
+  Future<void> logUserOut() async {
+    try {
+      await _firebaseAuth.signOut();
+    } catch (e) {
+      throw Exception("Error logging out: ${e.toString()}");
+    }
+  }
+
 // Forget password
   Future<void> forgetPassword(String email) async {
     try {

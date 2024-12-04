@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:online_shopping/core/routing/app_routes.dart';
 import 'package:online_shopping/core/styles/customs_colors.dart';
 import 'package:online_shopping/core/styles/styles.dart';
+import 'package:online_shopping/features/login/view.dart';
 import 'package:online_shopping/features/profile/cubit/profile_cubit.dart';
 
 class Profile extends StatefulWidget {
@@ -69,7 +71,7 @@ class _ProfileState extends State<Profile> {
                       style: AppTextStyles.font25blackRegular,
                     ),
                     SizedBox(
-                      height: 120.h,
+                      height: 50.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -161,12 +163,47 @@ class _ProfileState extends State<Profile> {
                       ],
                     ),
                     SizedBox(
-                      height: 10.h,
+                      height: 20.h,
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 1,
+                        width: double.infinity,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            context.read<ProfileCubit>().logout();
+                            Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (context) => const LoginScreen(),
+                                settings: const RouteSettings(
+                                    arguments: {'hideNavBar': true}),
+                              ),
+                              (route) =>
+                                  false, // This removes all previous routes
+                            );
+                          },
+                          child: const Text(
+                            'Logout',
+                            style: TextStyle(
+                                color: Colors.red), // Example text style
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 );
               }
-              return Center(child: Text('No data available.'));
+              return const Center(child: Text('No data available.'));
             },
           ),
         ),
