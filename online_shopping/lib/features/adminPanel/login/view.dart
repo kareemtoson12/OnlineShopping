@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_shopping/core/styles/customs_colors.dart';
 import 'package:online_shopping/core/styles/styles.dart';
 import 'package:online_shopping/features/adminPanel/widgets/email_password_for_admin.dart';
-import 'package:online_shopping/features/login/widgets/email_and_password.dart';
 
 class AdminPanel extends StatelessWidget {
   const AdminPanel({super.key});

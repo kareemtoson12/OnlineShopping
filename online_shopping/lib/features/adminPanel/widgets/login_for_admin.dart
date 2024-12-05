@@ -32,7 +32,7 @@ class LoginButtonForAdmin extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Admin Login Successful')),
           );
-          Navigator.pushNamed(context, Routes.forgetPassword);
+          Navigator.pushNamed(context, Routes.addProducts);
         } else if (state is AdminLoginError) {
           Navigator.of(context).pop(); // Close loading dialog
           ScaffoldMessenger.of(context).showSnackBar(

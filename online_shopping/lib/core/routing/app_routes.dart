@@ -11,4 +11,6 @@ class Routes {
   static const String cart = '/CartPage';
   static const String productInfo = '/productInformationScreen';
   static const String adminPanel = '/AdminPanel';
+  static const String addProducts = '/AddProducts';
+  static const String deleteProduct = '/DeleteProduct';
 }
