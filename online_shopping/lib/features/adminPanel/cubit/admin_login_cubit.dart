@@ -15,19 +15,14 @@ class AdminLoginCubit extends Cubit<AdminLoginState> {
           await FirebaseFirestore.instance.collection("Admin").get();
 
       // Check if admin exists
-      final admin = snapshot.docs.firstWhere(
+      snapshot.docs.firstWhere(
         (doc) {
           final data = doc.data();
           return data['email'] == email && data['password'] == password;
         },
-        orElse: () => null!,
       );
 
-      if (admin != null) {
-        emit(AdminLoginSuccess());
-      } else {
-        emit(AdminLoginError("Invalid email or password."));
-      }
+      emit(AdminLoginSuccess());
     } catch (e) {
       emit(AdminLoginError("Failed to login: $e"));
     }

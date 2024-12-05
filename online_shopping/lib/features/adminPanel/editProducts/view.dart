@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:online_shopping/core/routing/app_routes.dart';
+
 import 'package:online_shopping/core/styles/customs_colors.dart';
 import 'package:online_shopping/core/styles/styles.dart';
 
@@ -35,7 +35,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         toolbarHeight: 95.0.dg,
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, Routes.login);
+            Navigator.pop(context);
           },
           icon: const Icon(
             Icons.arrow_back_ios,

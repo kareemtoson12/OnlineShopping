@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:online_shopping/core/routing/app_routes.dart';
+
 import 'package:online_shopping/core/styles/customs_colors.dart';
 import 'package:online_shopping/core/styles/styles.dart';
 import 'package:online_shopping/features/product/models/product_model.dart';
@@ -35,7 +35,7 @@ class _AddProductsState extends State<AddProducts> {
         toolbarHeight: 95.0.dg,
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, Routes.login);
+            Navigator.pop(context);
           },
           icon: const Icon(
             Icons.arrow_back_ios,
@@ -185,7 +185,6 @@ Future<void> addProduct(BuildContext context, ProductModel product) async {
     );
 
     // Generate a unique ID for the product
-    final productId = _firestore.collection('products').doc().id;
 
     // Create a new ProductModel with the generated ID
     final productWithId = product.copyWith(

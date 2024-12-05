@@ -5,6 +5,7 @@ import 'package:online_shopping/core/services/auth_gate.dart';
 import 'package:online_shopping/features/adminPanel/addProducts/view.dart';
 import 'package:online_shopping/features/adminPanel/deleteProducts/view.dart';
 import 'package:online_shopping/features/adminPanel/editProducts/view.dart';
+import 'package:online_shopping/features/adminPanel/functionality/view.dart';
 import 'package:online_shopping/features/adminPanel/login/view.dart';
 import 'package:online_shopping/features/forgetPassword/view.dart';
 import 'package:online_shopping/features/home/view.dart';
@@ -51,6 +52,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (context) => DeleteProductScreen());
       case Routes.editProduct:
         return MaterialPageRoute(builder: (context) => EditProductScreen());
+      case Routes.adminfunctionality:
+        return MaterialPageRoute(builder: (context) => Adminfunctionality());
       default:
         return null; // Handle unknown routes
     }

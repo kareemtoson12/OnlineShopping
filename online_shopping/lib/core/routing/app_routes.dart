@@ -14,4 +14,5 @@ class Routes {
   static const String addProducts = '/AddProducts';
   static const String deleteProduct = '/DeleteProduct';
   static const String editProduct = '/EditProductScreen ';
+  static const String adminfunctionality = '/Adminfunctionality ';
 }
