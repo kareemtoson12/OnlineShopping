@@ -15,4 +15,7 @@ class Routes {
   static const String deleteProduct = '/DeleteProduct';
   static const String editProduct = '/EditProductScreen ';
   static const String adminfunctionality = '/Adminfunctionality ';
+  static const String addCategory = '/AddCategoryScreen ';
+  static const String editCategory = '/EditCategoryScreen ';
+  static const String deleteCategory = '/DeleteCategoryScreen  ';
 }

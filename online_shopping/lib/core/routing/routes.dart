@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:online_shopping/core/routing/app_routes.dart';
 import 'package:online_shopping/core/services/auth_gate.dart';
-import 'package:online_shopping/features/adminPanel/addProducts/view.dart';
-import 'package:online_shopping/features/adminPanel/deleteProducts/view.dart';
-import 'package:online_shopping/features/adminPanel/editProducts/view.dart';
+import 'package:online_shopping/features/adminPanel/categories/addCategories/view.dart';
+import 'package:online_shopping/features/adminPanel/categories/deleteCategories/view.dart';
+import 'package:online_shopping/features/adminPanel/categories/editCategories/view.dart';
+import 'package:online_shopping/features/adminPanel/products/addProducts/view.dart';
+import 'package:online_shopping/features/adminPanel/products/deleteProducts/view.dart';
+import 'package:online_shopping/features/adminPanel/products/editProducts/view.dart';
 import 'package:online_shopping/features/adminPanel/functionality/view.dart';
 import 'package:online_shopping/features/adminPanel/login/view.dart';
 import 'package:online_shopping/features/forgetPassword/view.dart';
@@ -54,6 +57,12 @@ class AppRoutes {
         return MaterialPageRoute(builder: (context) => EditProductScreen());
       case Routes.adminfunctionality:
         return MaterialPageRoute(builder: (context) => Adminfunctionality());
+      case Routes.addCategory:
+        return MaterialPageRoute(builder: (context) => AddCategoryScreen());
+      case Routes.editCategory:
+        return MaterialPageRoute(builder: (context) => EditCategoryScreen());
+      case Routes.deleteCategory:
+        return MaterialPageRoute(builder: (context) => DeleteCategoryScreen());
       default:
         return null; // Handle unknown routes
     }

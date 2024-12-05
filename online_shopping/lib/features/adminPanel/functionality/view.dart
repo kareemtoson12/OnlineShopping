@@ -44,6 +44,18 @@ class Adminfunctionality extends StatelessWidget {
                 height: 15.h,
               ),
               routsFunctions('delete Products', context, Routes.deleteProduct),
+              SizedBox(
+                height: 50.h,
+              ),
+              routsFunctions('Add Category', context, Routes.addCategory),
+              SizedBox(
+                height: 15.h,
+              ),
+              routsFunctions('Edit Category', context, Routes.editCategory),
+              SizedBox(
+                height: 15.h,
+              ),
+              routsFunctions('delete Category', context, Routes.deleteCategory),
             ],
           ),
         ),
