@@ -16,6 +16,23 @@ class ProductModel {
     required this.images,
   });
 
+  // CopyWith method
+  ProductModel copyWith({
+    String? productId,
+    String? categoryId,
+    String? title,
+    int? price,
+    String? images,
+  }) {
+    return ProductModel(
+      productId: productId ?? this.productId,
+      categoryId: categoryId ?? this.categoryId,
+      title: title ?? this.title,
+      price: price ?? this.price,
+      images: images ?? this.images,
+    );
+  }
+
   // Factory method to create a ProductModel from Firestore DocumentSnapshot
   factory ProductModel.fromDocumentSnapshot(
       DocumentSnapshot<Map<String, dynamic>> doc) {
