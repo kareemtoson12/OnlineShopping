@@ -31,32 +31,42 @@ class Adminfunctionality extends StatelessWidget {
       ),
       body: SafeArea(
         child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              routsFunctions('Add Products', context, Routes.addProducts),
-              SizedBox(
-                height: 15.h,
-              ),
-              routsFunctions('Edit Products', context, Routes.editProduct),
-              SizedBox(
-                height: 15.h,
-              ),
-              routsFunctions('delete Products', context, Routes.deleteProduct),
-              SizedBox(
-                height: 50.h,
-              ),
-              routsFunctions('Add Category', context, Routes.addCategory),
-              SizedBox(
-                height: 15.h,
-              ),
-              routsFunctions('Edit Category', context, Routes.editCategory),
-              SizedBox(
-                height: 15.h,
-              ),
-              routsFunctions('delete Category', context, Routes.deleteCategory),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 15.h,
+                ),
+                routsFunctions('Add Products', context, Routes.addProducts),
+                SizedBox(
+                  height: 15.h,
+                ),
+                routsFunctions('Edit Products', context, Routes.editProduct),
+                SizedBox(
+                  height: 15.h,
+                ),
+                routsFunctions(
+                    'delete Products', context, Routes.deleteProduct),
+                SizedBox(
+                  height: 50.h,
+                ),
+                routsFunctions('Add Category', context, Routes.addCategory),
+                SizedBox(
+                  height: 15.h,
+                ),
+                routsFunctions('Edit Category', context, Routes.editCategory),
+                SizedBox(
+                  height: 15.h,
+                ),
+                routsFunctions(
+                    'delete Category', context, Routes.deleteCategory),
+                SizedBox(
+                  height: 15.h,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -70,7 +80,7 @@ class Adminfunctionality extends StatelessWidget {
       },
       child: Container(
         width: 300.w,
-        height: 80.h,
+        height: 70.h,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
             color: CustomsColros.primaryColor),

@@ -12,8 +12,8 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> login(String email, String password) async {
     emit(LoginLoading());
     try {
-      //applay login
-      authService.signInWithEmailandPassword(email, password);
+      // Await the sign-in operation
+      await authService.signInWithEmailandPassword(email, password);
       emit(LoginSuccess());
     } on FirebaseAuthException catch (e) {
       String errorMessage;

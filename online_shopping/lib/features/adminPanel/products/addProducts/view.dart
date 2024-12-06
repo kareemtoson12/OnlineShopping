@@ -17,6 +17,10 @@ class _AddProductsState extends State<AddProducts> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _imageUrlController = TextEditingController();
+  final TextEditingController _stockController =
+      TextEditingController(); // New controller for stock
+  final TextEditingController _descriptionController =
+      TextEditingController(); // New controller for description
 
   String? _selectedCategory;
   int? _selectedCategoryId;
@@ -74,6 +78,24 @@ class _AddProductsState extends State<AddProducts> {
               ),
               SizedBox(height: 20.h),
               TextField(
+                controller: _stockController, // Add stock input field
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Stock',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              SizedBox(height: 20.h),
+              TextField(
+                controller:
+                    _descriptionController, // Add description input field
+                decoration: const InputDecoration(
+                  labelText: 'Description',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              SizedBox(height: 20.h),
+              TextField(
                 controller: _imageUrlController,
                 decoration: const InputDecoration(
                   labelText: 'Image URL',
@@ -108,12 +130,18 @@ class _AddProductsState extends State<AddProducts> {
                     onTap: () async {
                       final title = _titleController.text;
                       final price = _priceController.text;
+                      final stock = _stockController.text; // Get stock value
+                      final description =
+                          _descriptionController.text; // Get description value
                       final imageUrl = _imageUrlController.text;
                       final categoryId = _selectedCategoryId;
 
                       if (title.isEmpty ||
                           price.isEmpty ||
+                          stock.isEmpty || // Check if stock is empty
                           imageUrl.isEmpty ||
+                          description
+                              .isEmpty || // Check if description is empty
                           categoryId == null) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
@@ -129,12 +157,17 @@ class _AddProductsState extends State<AddProducts> {
                           title: title,
                           price: int.parse(price),
                           images: imageUrl,
+                          stock: int.parse(stock), // Convert stock to int
+                          description: description,
                         );
 
                         await addProduct(context, product);
 
                         _titleController.clear();
                         _priceController.clear();
+                        _stockController.clear(); // Clear stock field
+                        _descriptionController
+                            .clear(); // Clear description field
                         _imageUrlController.clear();
                         setState(() {
                           _selectedCategory = null;
@@ -173,6 +206,7 @@ class _AddProductsState extends State<AddProducts> {
 }
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
 Future<void> addProduct(BuildContext context, ProductModel product) async {
   final scaffoldMessenger = ScaffoldMessenger.of(context);
 
@@ -185,8 +219,6 @@ Future<void> addProduct(BuildContext context, ProductModel product) async {
     );
 
     // Generate a unique ID for the product
-
-    // Create a new ProductModel with the generated ID
     final productWithId = product.copyWith(
       productId: _firestore.collection('Products').doc().id, // Match case
     );

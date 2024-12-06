@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:online_shopping/core/styles/customs_colors.dart';
 import 'package:online_shopping/core/styles/styles.dart';
 import 'package:online_shopping/features/home/cubit/home_cubit.dart';
 import 'package:online_shopping/features/product/models/product_model.dart';
+import 'package:online_shopping/features/product/view.dart';
 
 class ProductListScreen extends StatelessWidget {
   const ProductListScreen({super.key});
@@ -43,6 +45,7 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: CustomsColros.offPrimaryColor,
       elevation: 4,
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: ListTile(
@@ -59,7 +62,22 @@ class ProductCard extends StatelessWidget {
           '\$${product.price}',
           style: AppTextStyles.font25blackRegular,
         ),
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProductDetails(
+                data: {
+                  'image': product.images,
+                  'name': product.title,
+                  'price': product.price,
+                  'stock': product.stock,
+                  'description': product.description,
+                },
+              ),
+            ),
+          );
+        },
       ),
     );
   }

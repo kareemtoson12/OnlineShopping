@@ -46,7 +46,9 @@ class AppRoutes {
         return MaterialPageRoute(builder: (context) => Profile());
       case Routes.productInfo:
         return MaterialPageRoute(
-            builder: (context) => ProductInformationScreen());
+            builder: (context) => ProductDetails(
+                  data: dummyData,
+                ));
       case Routes.adminPanel:
         return MaterialPageRoute(builder: (context) => AdminPanel());
       case Routes.addProducts:
@@ -68,3 +70,14 @@ class AppRoutes {
     }
   }
 }
+
+Map<String, dynamic> dummyData = {
+  'image': 'https://via.placeholder.com/250', // Sample image URL
+  'rate': 4.5, // Rating out of 5
+  'sale': 20, // Discount percentage
+  'name': 'Sample Product', // Product name
+  'stock': 15, // Number of items in stock
+  'brand': 'Brand X', // Brand name
+  'description':
+      'This is a sample product description to test the layout.', // Product description
+};

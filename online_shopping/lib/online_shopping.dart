@@ -17,7 +17,7 @@ class OnlineShopping extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Online shopping',
         onGenerateRoute: appRouter.generateRoute,
-        initialRoute: Routes.deleteCategory,
+        initialRoute: Routes.customNaivBar,
       ),
     );
   }
