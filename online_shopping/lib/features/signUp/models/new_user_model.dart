@@ -1,3 +1,5 @@
+import 'package:online_shopping/features/cart/models/cart_model.dart';
+
 class NewUserModel {
   final String id;
   final String firstName;
@@ -5,6 +7,7 @@ class NewUserModel {
   final String phoneNumber;
   final String userName;
   final String email;
+  final CartModel cartModel; // Added cartModel as an attribute
 
   NewUserModel({
     required this.id,
@@ -13,10 +16,15 @@ class NewUserModel {
     required this.phoneNumber,
     required this.userName,
     required this.email,
+    required this.cartModel, // Added cartModel to the constructor
   });
 
-// Convert Firestore document data (Map) to NewUserModel instance
+  // Convert Firestore document data (Map) to NewUserModel instance
+// Assuming the cart is a list in Firestore
   factory NewUserModel.fromJson(Map<String, dynamic> json) {
+    var cartData = json['cart'] is List
+        ? json['cart'].first
+        : json['cart']; // Get the first item from the list if it's a list
     return NewUserModel(
       id: json['id'] as String,
       firstName: json['firstName'] as String,
@@ -24,6 +32,7 @@ class NewUserModel {
       phoneNumber: json['phoneNumber'] as String,
       userName: json['userName'] as String,
       email: json['email'] as String,
+      cartModel: CartModel.fromJson(cartData ?? {}), // Parse the cart
     );
   }
 
@@ -36,6 +45,7 @@ class NewUserModel {
       'phoneNumber': phoneNumber,
       'userName': userName,
       'email': email,
+      'cart': cartModel.toMap(), // Convert CartModel to map
     };
   }
 
@@ -47,6 +57,7 @@ class NewUserModel {
     String? phoneNumber,
     String? userName,
     String? email,
+    CartModel? cartModel, // Added cartModel as an optional parameter
   }) {
     return NewUserModel(
       id: id ?? this.id,
@@ -55,6 +66,7 @@ class NewUserModel {
       phoneNumber: phoneNumber ?? this.phoneNumber,
       userName: userName ?? this.userName,
       email: email ?? this.email,
+      cartModel: cartModel ?? this.cartModel, // Updated to use cartModel
     );
   }
 }
