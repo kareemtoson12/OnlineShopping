@@ -18,4 +18,5 @@ class Routes {
   static const String addCategory = '/AddCategoryScreen ';
   static const String editCategory = '/EditCategoryScreen ';
   static const String deleteCategory = '/DeleteCategoryScreen  ';
+  static const String categoryProductsScreen = '/CategoryProductsScreen  ';
 }

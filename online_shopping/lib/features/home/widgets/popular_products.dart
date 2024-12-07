@@ -4,7 +4,7 @@ import 'package:online_shopping/core/styles/customs_colors.dart';
 import 'package:online_shopping/core/styles/styles.dart';
 import 'package:online_shopping/features/home/cubit/home_cubit.dart';
 import 'package:online_shopping/features/product/models/product_model.dart';
-import 'package:online_shopping/features/product/view.dart';
+import 'package:online_shopping/features/product/ProductDetails.dart';
 
 class ProductListScreen extends StatelessWidget {
   const ProductListScreen({super.key});

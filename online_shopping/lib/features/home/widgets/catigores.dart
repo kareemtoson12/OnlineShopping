@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_shopping/core/styles/customs_colors.dart';
 import 'package:online_shopping/core/styles/styles.dart';
+import 'package:online_shopping/features/categoryProduct/view.dart';
 import 'package:online_shopping/features/home/cubit/home_cubit.dart';
 
 class CategoriesScreen extends StatelessWidget {
@@ -30,9 +31,16 @@ class CategoriesScreen extends StatelessWidget {
                 final category = categories[index];
                 return GestureDetector(
                   onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
+                    /*   ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Tapped on ${category.name}')),
-                    );
+                    ); */
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CategoryProductsScreen(
+                            category: category.name,
+                          ),
+                        ));
                   },
                   child: Column(
                     children: [
@@ -79,3 +87,20 @@ class CategoriesScreen extends StatelessWidget {
     );
   }
 }
+
+final List<Map<String, dynamic>> dummyProducts = [
+  {
+    "name": "Smartphone",
+    "category": "Electronics",
+    "price": 599.99,
+    "description": "A high-performance smartphone with 128GB storage.",
+    "stock": 20,
+  },
+  {
+    "name": "Laptop",
+    "category": "Electronics",
+    "price": 999.99,
+    "description": "A lightweight laptop with a 15-inch display.",
+    "stock": 15,
+  },
+];

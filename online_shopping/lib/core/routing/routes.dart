@@ -15,7 +15,7 @@ import 'package:online_shopping/features/home/view.dart';
 import 'package:online_shopping/features/login/view.dart';
 import 'package:online_shopping/features/naivBar/view.dart';
 import 'package:online_shopping/features/onboarding/view.dart';
-import 'package:online_shopping/features/product/view.dart';
+import 'package:online_shopping/features/product/ProductDetails.dart';
 import 'package:online_shopping/features/profile/view.dart';
 import 'package:online_shopping/features/signUp/view.dart';
 import 'package:online_shopping/features/splash/view.dart';
