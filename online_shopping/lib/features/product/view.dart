@@ -1,6 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:online_shopping/core/routing/app_routes.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:online_shopping/core/styles/customs_colors.dart';
 import 'package:online_shopping/core/styles/styles.dart';
 
@@ -28,6 +29,42 @@ class _ItemDetailsState extends State<ProductDetails> {
     });
   }
 
+  Future<String?> getUserId() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    return user?.uid;
+  }
+
+  Future<void> addToCart(
+      BuildContext context, Map<String, dynamic> product) async {
+    try {
+      final userId = await getUserId();
+      if (userId == null) {
+        throw 'No user is currently logged in.';
+      }
+
+      final userRef =
+          FirebaseFirestore.instance.collection('users').doc(userId);
+
+      await userRef.set({
+        'cart': FieldValue.arrayUnion([product]),
+      }, SetOptions(merge: true));
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Product added to cart successfully!'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to add product to cart: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final data = widget.data;
@@ -48,7 +85,7 @@ class _ItemDetailsState extends State<ProductDetails> {
         centerTitle: true,
         backgroundColor: CustomsColros.primaryColor,
         title: Text(
-          'product information',
+          'Product Information',
           style: AppTextStyles.font30blackTitle,
         ),
       ),
@@ -121,7 +158,13 @@ class _ItemDetailsState extends State<ProductDetails> {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => addToCart(context, {
+                    'id': data['id'] ?? '',
+                    'name': data['name'] ?? 'Unnamed Product',
+                    'price': data['price'] ?? 0,
+                    'quantity': q > 0 ? q : 1,
+                    'image': data['image'] ?? '',
+                  }),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xff403392),
                     padding: const EdgeInsets.symmetric(

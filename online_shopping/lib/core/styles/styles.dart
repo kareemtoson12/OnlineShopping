@@ -46,6 +46,11 @@ class AppTextStyles {
     fontWeight: FontWeight.bold,
     color: Colors.black,
   );
+  static TextStyle fontForshowCart = TextStyle(
+    fontSize: 15.sp,
+    fontWeight: FontWeight.bold,
+    color: CustomsColros.primaryColor,
+  );
   static TextStyle font18gray = TextStyle(
     fontSize: 18.sp,
     fontWeight: FontWeight.w500,
