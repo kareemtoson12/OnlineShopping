@@ -95,6 +95,61 @@ class _CartPageState extends State<CartPage> {
       (sum, item) => sum + (item['price'] * item['quantity']),
     );
 
+    Future<void> handleCheckout() async {
+      try {
+        final user = FirebaseAuth.instance.currentUser;
+
+        if (user == null) {
+          throw 'No user is logged in.';
+        }
+
+        final transactionId = FirebaseFirestore.instance
+            .collection('transactions')
+            .doc()
+            .id; // Generate a unique transaction ID
+
+        final transactionData = {
+          'transactionId': transactionId,
+          'userId': user.uid,
+          'amount': totalPrice,
+          'timestamp': Timestamp.now(),
+          'details': cartItems.map((item) {
+            return {
+              'name': item['name'],
+              'price': item['price'],
+              'quantity': item['quantity'],
+            };
+          }).toList(),
+        };
+
+        // Save the transaction to the "transactions" collection
+        await FirebaseFirestore.instance
+            .collection('Transaction')
+            .doc(transactionId)
+            .set(transactionData);
+
+        // Clear the cart for the user
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .update({'cart': []});
+
+        // Clear local cartItems
+        setState(() {
+          cartItems = [];
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text('Checkout successful! Transaction saved.')),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to complete checkout: $e')),
+        );
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80.0.dg,
@@ -226,7 +281,7 @@ class _CartPageState extends State<CartPage> {
                           ElevatedButton(
                             onPressed: totalPrice > 0
                                 ? () {
-                                    // call checkout function
+                                    handleCheckout();
                                   }
                                 : null,
                             style: ElevatedButton.styleFrom(
