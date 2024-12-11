@@ -174,18 +174,12 @@ class _ItemDetailsState extends State<ProductDetails> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(
-                  data['productId'] ?? 'Product id',
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
                 const SizedBox(height: 5),
                 Text(
                   '\$${data['price']?.toString() ?? "0"}',
                   style: const TextStyle(
                     fontSize: 20,
+                    color: Colors.blue,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -235,7 +229,7 @@ class _ItemDetailsState extends State<ProductDetails> {
                 ),
                 const SizedBox(height: 20),
                 const Text(
-                  'Submit Feedback',
+                  'Your Feedback',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 const SizedBox(height: 10),
@@ -261,17 +255,24 @@ class _ItemDetailsState extends State<ProductDetails> {
                   controller: feedbackController,
                   maxLines: 4,
                   decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Write your feedback here...',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(55))),
+                    hintText: '         Write your feedback here...',
                   ),
                 ),
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () => submitFeedback(context),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
+                    backgroundColor: const Color(0xff403392),
                   ),
-                  child: const Text('Submit'),
+                  child: const Text(
+                    'Submit',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
               ],
             ),

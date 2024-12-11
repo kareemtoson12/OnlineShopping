@@ -75,11 +75,11 @@ class CategoriesScreen extends StatelessWidget {
           return Center(
             child: Text(
               'Failed to load categories: ${state.errorMessage}',
-              style: TextStyle(color: Colors.red),
+              style: const TextStyle(color: Colors.red),
             ),
           );
         } else {
-          return Center(
+          return const Center(
             child: Text('No categories to display.'),
           );
         }
@@ -92,14 +92,14 @@ final List<Map<String, dynamic>> dummyProducts = [
   {
     "name": "Smartphone",
     "category": "Electronics",
-    "price": 599.99,
+    "price": 599, // Use int instead of double
     "description": "A high-performance smartphone with 128GB storage.",
     "stock": 20,
   },
   {
     "name": "Laptop",
     "category": "Electronics",
-    "price": 999.99,
+    "price": 999, // Use int instead of double
     "description": "A lightweight laptop with a 15-inch display.",
     "stock": 15,
   },

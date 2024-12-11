@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:online_shopping/core/routing/app_routes.dart';
 
 import 'package:online_shopping/core/styles/customs_colors.dart';
 import 'package:online_shopping/core/styles/styles.dart';
@@ -13,6 +14,16 @@ class AdminPanel extends StatelessWidget {
     return Scaffold(
       backgroundColor: CustomsColros.white,
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, Routes.login);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+            size: 30,
+          ),
+        ),
         toolbarHeight: 95.0.dg,
         centerTitle: true,
         backgroundColor: CustomsColros.primaryColor,

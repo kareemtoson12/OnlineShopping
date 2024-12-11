@@ -91,7 +91,7 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     double totalPrice = cartItems.fold(
-      0.0,
+      0,
       (sum, item) => sum + (item['price'] * item['quantity']),
     );
 
@@ -165,7 +165,7 @@ class _CartPageState extends State<CartPage> {
                                                 AppTextStyles.fontForshowCart),
                                         const SizedBox(height: 10),
                                         Text(
-                                            '\$${item['price']?.toStringAsFixed(2) ?? '0.00'}',
+                                            '\$${item['price']?.toString() ?? '0'}',
                                             style: AppTextStyles
                                                 .fontForSmallLabel),
                                       ],
@@ -238,7 +238,7 @@ class _CartPageState extends State<CartPage> {
                               ),
                             ),
                             child: Text(
-                              "Checkout \$${totalPrice.toStringAsFixed(2)}",
+                              "Checkout \$${totalPrice.toString()}",
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
