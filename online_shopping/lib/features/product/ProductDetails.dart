@@ -1,7 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:online_shopping/core/styles/customs_colors.dart';
 import 'package:online_shopping/core/styles/styles.dart';
 
@@ -16,6 +17,8 @@ class ProductDetails extends StatefulWidget {
 
 class _ItemDetailsState extends State<ProductDetails> {
   int q = 0; // Default quantity
+  double rating = 0.0;
+  final TextEditingController feedbackController = TextEditingController();
 
   void addd() {
     setState(() {
@@ -64,6 +67,48 @@ class _ItemDetailsState extends State<ProductDetails> {
       );
     }
   }
+
+  Future<void> submitFeedback(BuildContext context) async {
+    try {
+      final user = getUserId();
+      final feedback = {
+        'userId': widget.data['useid'],
+        'rating': rating,
+        'comment': feedbackController.text,
+        'timestamp': Timestamp
+            .now(), // Use Timestamp.now() instead of FieldValue.serverTimestamp()
+      };
+
+      final productRef = FirebaseFirestore.instance
+          .collection('Products')
+          .doc(widget.data['productId']);
+
+      print(widget.data['productId'] + '********************************');
+      // Add feedback to the feedback array
+      await productRef.update({
+        'feedback': FieldValue.arrayUnion([feedback]),
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Feedback submitted successfully!'),
+          backgroundColor: Colors.green,
+        ),
+      );
+      feedbackController.clear();
+      setState(() {
+        rating = 0.0;
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to submit feedback: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+//productId
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +174,13 @@ class _ItemDetailsState extends State<ProductDetails> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                Text(
+                  data['productId'] ?? 'Product id',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(height: 5),
                 Text(
                   '\$${data['price']?.toString() ?? "0"}',
@@ -180,6 +232,46 @@ class _ItemDetailsState extends State<ProductDetails> {
                       fontSize: 16,
                     ),
                   ),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Submit Feedback',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                const SizedBox(height: 10),
+                RatingBar.builder(
+                  initialRating: rating,
+                  minRating: 1,
+                  direction: Axis.horizontal,
+                  allowHalfRating: true,
+                  itemCount: 5,
+                  itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  itemBuilder: (context, _) => const Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  onRatingUpdate: (newRating) {
+                    setState(() {
+                      rating = newRating;
+                    });
+                  },
+                ),
+                const SizedBox(height: 10),
+                TextField(
+                  controller: feedbackController,
+                  maxLines: 4,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Write your feedback here...',
+                  ),
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () => submitFeedback(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                  ),
+                  child: const Text('Submit'),
                 ),
               ],
             ),

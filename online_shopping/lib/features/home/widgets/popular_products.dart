@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_shopping/core/styles/customs_colors.dart';
@@ -63,16 +64,21 @@ class ProductCard extends StatelessWidget {
           style: AppTextStyles.font25blackRegular,
         ),
         onTap: () {
+          User? user = FirebaseAuth.instance.currentUser;
+          String userId =
+              user?.uid ?? 'unknown'; // Fallback if user is not logged in
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => ProductDetails(
                 data: {
                   'image': product.images,
+                  'productId': product.productId,
                   'name': product.title,
                   'price': product.price,
                   'stock': product.stock,
                   'description': product.description,
+                  'useid': userId,
                 },
               ),
             ),
