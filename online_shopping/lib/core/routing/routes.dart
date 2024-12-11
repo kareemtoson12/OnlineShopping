@@ -10,6 +10,7 @@ import 'package:online_shopping/features/adminPanel/products/deleteProducts/view
 import 'package:online_shopping/features/adminPanel/products/editProducts/view.dart';
 import 'package:online_shopping/features/adminPanel/functionality/view.dart';
 import 'package:online_shopping/features/adminPanel/login/view.dart';
+import 'package:online_shopping/features/adminPanel/report/view.dart';
 import 'package:online_shopping/features/forgetPassword/view.dart';
 import 'package:online_shopping/features/home/view.dart';
 import 'package:online_shopping/features/login/view.dart';
@@ -65,6 +66,9 @@ class AppRoutes {
         return MaterialPageRoute(builder: (context) => EditCategoryScreen());
       case Routes.deleteCategory:
         return MaterialPageRoute(builder: (context) => DeleteCategoryScreen());
+      case Routes.reportsScreen:
+        return MaterialPageRoute(
+            builder: (context) => TransactionsReportPage());
       default:
         return null; // Handle unknown routes
     }

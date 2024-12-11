@@ -52,6 +52,10 @@ class Adminfunctionality extends StatelessWidget {
                 SizedBox(
                   height: 50.h,
                 ),
+                routsFunctions('Report', context, Routes.reportsScreen),
+                SizedBox(
+                  height: 50.h,
+                ),
                 routsFunctions('Add Category', context, Routes.addCategory),
                 SizedBox(
                   height: 15.h,

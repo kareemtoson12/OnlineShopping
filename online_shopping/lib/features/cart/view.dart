@@ -141,6 +141,7 @@ class _CartPageState extends State<CartPage> {
 
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
+              backgroundColor: Colors.green,
               content: Text('Checkout successful! Transaction saved.')),
         );
       } catch (e) {
