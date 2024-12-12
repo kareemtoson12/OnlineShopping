@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:online_shopping/core/routing/app_routes.dart';
 import 'package:online_shopping/core/services/auth_gate.dart';
+import 'package:online_shopping/features/adminPanel/bestSelling/view.dart';
 import 'package:online_shopping/features/adminPanel/categories/addCategories/view.dart';
 import 'package:online_shopping/features/adminPanel/categories/deleteCategories/view.dart';
 import 'package:online_shopping/features/adminPanel/categories/editCategories/view.dart';
@@ -69,6 +70,9 @@ class AppRoutes {
       case Routes.reportsScreen:
         return MaterialPageRoute(
             builder: (context) => TransactionsReportPage());
+      case Routes.bestSellingScreen:
+        return MaterialPageRoute(
+            builder: (context) => BestSellingProductsChart());
       default:
         return null; // Handle unknown routes
     }

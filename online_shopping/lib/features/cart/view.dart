@@ -122,17 +122,43 @@ class _CartPageState extends State<CartPage> {
           }).toList(),
         };
 
-        // Save the transaction to the "transactions" collection
-        await FirebaseFirestore.instance
-            .collection('Transaction')
-            .doc(transactionId)
-            .set(transactionData);
+        // Batch to handle multiple writes
+        final batch = FirebaseFirestore.instance.batch();
 
-        // Clear the cart for the user
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(user.uid)
-            .update({'cart': []});
+        // Update stock for each item in the cart
+        for (var item in cartItems) {
+          final productRef = FirebaseFirestore.instance
+              .collection('Products')
+              .doc(item['id']); // Ensure `id` is the document ID
+          print('**********===');
+          print(productRef);
+          final productSnapshot = await productRef.get();
+          if (productSnapshot.exists) {
+            final currentStock = productSnapshot['stock'] ?? 0;
+            final newStock = currentStock - item['quantity'];
+
+            if (newStock < 0) {
+              throw 'Insufficient stock for product: ${item['name']}';
+            }
+
+            // Add stock update to batch
+            batch.update(productRef, {'stock': newStock});
+          }
+        }
+
+        // Add transaction record
+        final transactionRef = FirebaseFirestore.instance
+            .collection('Transaction')
+            .doc(transactionId);
+        batch.set(transactionRef, transactionData);
+
+        // Clear the user's cart
+        final userCartRef =
+            FirebaseFirestore.instance.collection('users').doc(user.uid);
+        batch.update(userCartRef, {'cart': []});
+
+        // Commit the batch
+        await batch.commit();
 
         // Clear local cartItems
         setState(() {
@@ -141,8 +167,10 @@ class _CartPageState extends State<CartPage> {
 
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-              backgroundColor: Colors.green,
-              content: Text('Checkout successful! Transaction saved.')),
+            backgroundColor: Colors.green,
+            content: Text(
+                'Checkout successful! Stock updated and transaction saved.'),
+          ),
         );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(

@@ -205,11 +205,12 @@ class _ItemDetailsState extends State<ProductDetails> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () => addToCart(context, {
-                    'id': data['id'] ?? '',
+                    'id': data['productId'] ?? '',
                     'name': data['name'] ?? 'Unnamed Product',
                     'price': data['price'] ?? 0,
                     'quantity': q > 0 ? q : 1,
                     'image': data['image'] ?? '',
+                    'stock': data['stock'] ?? 0,
                   }),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xff403392),

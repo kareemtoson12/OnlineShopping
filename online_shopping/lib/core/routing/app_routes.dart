@@ -20,4 +20,5 @@ class Routes {
   static const String deleteCategory = '/DeleteCategoryScreen  ';
   static const String categoryProductsScreen = '/CategoryProductsScreen  ';
   static const String reportsScreen = '/CategoryProductsScreen  ';
+  static const String bestSellingScreen = '/BestSellingProductsChart  ';
 }

@@ -135,7 +135,7 @@ class _TransactionsReportPageState extends State<TransactionsReportPage> {
                         color: CustomsColros.primaryColor),
                     child: Center(
                       child: Text(
-                        'pick A Date',
+                        'display ',
                         style: AppTextStyles.font25blacSubTitle,
                       ),
                     ),
