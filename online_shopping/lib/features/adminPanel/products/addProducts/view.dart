@@ -152,6 +152,7 @@ class _AddProductsState extends State<AddProducts> {
 
                       try {
                         final product = ProductModel(
+                          quantity: 0,
                           productId: '', // Firestore will generate this
                           categoryId: categoryId.toString(),
                           title: title,

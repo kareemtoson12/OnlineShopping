@@ -29,14 +29,14 @@ class BestSellingProductsChart extends StatelessWidget {
         centerTitle: true,
         backgroundColor: CustomsColros.primaryColor,
         title: Text(
-          'best selling products',
+          'Best Selling Products',
           style: AppTextStyles.font25blod,
         ),
       ),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: FirebaseFirestore.instance
             .collection('Products') // Replace with your collection name
-            .orderBy('stock') // Order by stock in ascending order
+            .orderBy('quantity') // Order by quantity in ascending order
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -134,11 +134,10 @@ class BestSellingProductsChart extends StatelessWidget {
                   ),
                   barTouchData: BarTouchData(
                     touchTooltipData: BarTouchTooltipData(
-                      //tooltipBgColor: Colors.blueAccent,
                       getTooltipItem: (group, groupIndex, rod, rodIndex) {
                         final product = products[group.x.toInt()].title;
                         return BarTooltipItem(
-                          '$product\nStock: ${rod.toY.toInt()}',
+                          '$product\nQuantity: ${rod.toY.toInt()}',
                           const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -164,7 +163,7 @@ class BestSellingProductsChart extends StatelessWidget {
         x: index,
         barRods: [
           BarChartRodData(
-            toY: product.stock.toDouble(),
+            toY: product.quantity.toDouble(), // Change to quantity
             color: CustomsColros.primaryColor, // Change color if needed
             width: 16,
             borderRadius: BorderRadius.circular(4),

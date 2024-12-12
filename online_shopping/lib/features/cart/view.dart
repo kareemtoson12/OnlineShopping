@@ -125,17 +125,16 @@ class _CartPageState extends State<CartPage> {
         // Batch to handle multiple writes
         final batch = FirebaseFirestore.instance.batch();
 
-        // Update stock for each item in the cart
+        // Update stock for each item in the cart and increment quantity in the cart
         for (var item in cartItems) {
           final productRef = FirebaseFirestore.instance
               .collection('Products')
-              .doc(item['id']); // Ensure `id` is the document ID
-          print('**********===');
-          print(productRef);
+              .doc(item['id']); // Ensure id is the document ID
+
           final productSnapshot = await productRef.get();
           if (productSnapshot.exists) {
             final currentStock = productSnapshot['stock'] ?? 0;
-            final newStock = currentStock - item['quantity'];
+            final newStock = currentStock - 1; // Decrement stock by 1
 
             if (newStock < 0) {
               throw 'Insufficient stock for product: ${item['name']}';
@@ -143,6 +142,15 @@ class _CartPageState extends State<CartPage> {
 
             // Add stock update to batch
             batch.update(productRef, {'stock': newStock});
+
+            // Update the cart quantity in Firestore
+            item['quantity']++; // Increment quantity of the item in the cart
+
+            // Add cart update to batch
+            batch.update(
+                FirebaseFirestore.instance.collection('users').doc(user.uid), {
+              'cart': cartItems,
+            });
           }
         }
 
