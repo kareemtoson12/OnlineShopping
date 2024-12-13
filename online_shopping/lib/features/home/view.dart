@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_shopping/core/services/auth_service.dart';
@@ -7,7 +5,8 @@ import 'package:online_shopping/core/styles/customs_colors.dart';
 import 'package:online_shopping/core/styles/styles.dart';
 import 'package:online_shopping/features/home/widgets/catigores.dart';
 import 'package:online_shopping/features/home/widgets/popular_products.dart';
-import 'package:online_shopping/features/home/widgets/search_bar.dart';
+
+import 'package:online_shopping/features/search/serch_by_text_view.dart';
 
 class Homescreen extends StatelessWidget {
   const Homescreen({super.key});
@@ -65,7 +64,7 @@ class Homescreen extends StatelessWidget {
                   },
                 ),
                 SizedBox(height: 10.h),
-                searchWidget(),
+                _buildSearchWidget(context),
                 SizedBox(height: 10.h),
                 Text(
                   'Popular Categories',
@@ -108,6 +107,50 @@ class Homescreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildSearchWidget(BuildContext context) {
+    final TextEditingController searchController = TextEditingController();
+
+    return Container(
+      height: 60.h,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20.r),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              controller: searchController,
+              decoration: InputDecoration(
+                hintText: 'Search for products...',
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 12.h,
+                  horizontal: 16.w,
+                ),
+              ),
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.search, color: Colors.grey),
+            onPressed: () {
+              final query = searchController.text.trim();
+              if (query.isNotEmpty) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        SearchResultsScreen(searchQuery: query),
+                  ),
+                );
+              }
+            },
+          ),
+        ],
       ),
     );
   }
