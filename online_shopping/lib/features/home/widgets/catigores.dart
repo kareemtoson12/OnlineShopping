@@ -6,64 +6,68 @@ import 'package:online_shopping/core/styles/styles.dart';
 import 'package:online_shopping/features/categoryProduct/view.dart';
 import 'package:online_shopping/features/home/cubit/home_cubit.dart';
 
+// Stateless widget for displaying categories
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // final homeCubit = context.read<HomeCubit>();
-
+    // Using BlocBuilder to build UI based on the HomeCubit state
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
+        // Show a loading spinner when categories are loading
         if (state is HomeCategoriesLoading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (state is HomeCategoriesSuccess) {
-          final categories = state.categories;
+        }
+        // Display categories when the loading is successful
+        else if (state is HomeCategoriesSuccess) {
+          final categories = state.categories; // Fetch categories from state
 
           return SizedBox(
-            height: 120.h,
+            height: 120.h, // Set height for the categories container
             child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: categories.length,
+              scrollDirection: Axis.horizontal, // Horizontal scrolling
+              itemCount: categories.length, // Number of categories
               itemBuilder: (context, index) {
-                final category = categories[index];
+                final category = categories[index]; // Current category item
                 return GestureDetector(
                   onTap: () {
-                    /*   ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Tapped on ${category.name}')),
-                    ); */
+                    // Navigate to CategoryProductsScreen on tap
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CategoryProductsScreen(
-                            category: category.name,
-                          ),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CategoryProductsScreen(
+                          category: category.name, // Pass category name
+                        ),
+                      ),
+                    );
                   },
                   child: Column(
                     children: [
+                      // Circle-shaped container for category image
                       Container(
-                        height: 70.h,
-                        width: 70.w,
+                        height: 70.h, // Height of the container
+                        width: 70.w, // Width of the container
                         decoration: BoxDecoration(
-                          color: CustomsColros.white,
-                          borderRadius: BorderRadius.circular(75.r),
+                          color: CustomsColros.white, // Background color
+                          borderRadius: BorderRadius.circular(75.r), // Circle shape
                         ),
-                        margin: EdgeInsets.symmetric(horizontal: 9.w),
-                        padding: EdgeInsets.symmetric(horizontal: 9.w),
+                        margin: EdgeInsets.symmetric(horizontal: 9.w), // Horizontal margin
+                        padding: EdgeInsets.symmetric(horizontal: 9.w), // Padding inside
                         child: Image.network(
-                          category.image,
-                          height: 50.h,
-                          width: 50.w,
+                          category.image, // Display category image
+                          height: 50.h, // Height of the image
+                          width: 50.w, // Width of the image
                         ),
                       ),
-                      SizedBox(height: 10.h),
+                      SizedBox(height: 10.h), // Spacing between image and text
+                      // Category name text
                       Text(
-                        category.name,
+                        category.name, // Display category name
                         style: AppTextStyles.fontForLabel
-                            .copyWith(color: Colors.white),
+                            .copyWith(color: Colors.white), // Custom font with white color
                       ),
                     ],
                   ),
@@ -71,14 +75,18 @@ class CategoriesScreen extends StatelessWidget {
               },
             ),
           );
-        } else if (state is HomeCategoriesError) {
+        }
+        // Display an error message if category loading fails
+        else if (state is HomeCategoriesError) {
           return Center(
             child: Text(
-              'Failed to load categories: ${state.errorMessage}',
-              style: const TextStyle(color: Colors.red),
+              'Failed to load categories: ${state.errorMessage}', // Display error message
+              style: const TextStyle(color: Colors.red), // Red color for error text
             ),
           );
-        } else {
+        }
+        // Default message for no categories
+        else {
           return const Center(
             child: Text('No categories to display.'),
           );
@@ -88,19 +96,20 @@ class CategoriesScreen extends StatelessWidget {
   }
 }
 
+// Dummy product data for testing purposes
 final List<Map<String, dynamic>> dummyProducts = [
   {
-    "name": "Smartphone",
-    "category": "Electronics",
-    "price": 599, // Use int instead of double
-    "description": "A high-performance smartphone with 128GB storage.",
-    "stock": 20,
+    "name": "Smartphone", // Product name
+    "category": "Electronics", // Product category
+    "price": 599, // Product price (int instead of double)
+    "description": "A high-performance smartphone with 128GB storage.", // Description
+    "stock": 20, // Stock availability
   },
   {
-    "name": "Laptop",
-    "category": "Electronics",
-    "price": 999, // Use int instead of double
-    "description": "A lightweight laptop with a 15-inch display.",
-    "stock": 15,
+    "name": "Laptop", // Product name
+    "category": "Electronics", // Product category
+    "price": 999, // Product price (int instead of double)
+    "description": "A lightweight laptop with a 15-inch display.", // Description
+    "stock": 15, // Stock availability
   },
 ];
