@@ -9,29 +9,33 @@ import 'package:online_shopping/features/forgetPassword/cubit/forget_password_cu
 class ForgetPassword extends StatelessWidget {
   ForgetPassword({super.key});
 
+  // Form key for validating the input form
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  // TextEditingController to manage the email input field
   final TextEditingController _emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 95.0.dg,
+        toolbarHeight: 95.0.dg, // Dynamic height for responsiveness
         leading: IconButton(
           onPressed: () {
+            // Navigate back to the login screen
             Navigator.pushReplacementNamed(context, Routes.login);
           },
           icon: const Icon(
             Icons.arrow_back_ios,
-            color: Colors.white,
-            size: 30,
+            color: Colors.white, // White color for visibility
+            size: 30, // Large size for better accessibility
           ),
         ),
-        centerTitle: true,
-        backgroundColor: CustomsColros.primaryColor,
+        centerTitle: true, // Centers the title in the AppBar
+        backgroundColor: CustomsColros.primaryColor, // Custom primary color
         title: Text(
           'Forget Password',
-          style: AppTextStyles.font30blackTitle,
+          style: AppTextStyles.font30blackTitle, // Custom title style
         ),
       ),
       body: SafeArea(
@@ -41,57 +45,62 @@ class ForgetPassword extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Instructional text for users
                 Text(
                   'Enter your email, and we will send you a password reset link.',
-                  style: AppTextStyles.font18gray,
+                  style: AppTextStyles.font18gray, // Custom text style
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 20.h), // Vertical spacing
                 Form(
-                  key: _formKey,
+                  key: _formKey, // Link the form with the validator
                   child: Column(
                     children: [
+                      // Email input field with validation
                       TextFormField(
-                        controller: _emailController,
+                        controller: _emailController, // Controller for input management
                         decoration: InputDecoration(
-                          labelText: 'Email',
+                          labelText: 'Email', // Input field label
                           prefixIcon: const Icon(
-                            Icons.email,
+                            Icons.email, // Email icon for clarity
                             color: CustomsColros.primaryColor,
                           ),
-                          labelStyle: AppTextStyles.fontForLabel,
+                          labelStyle: AppTextStyles.fontForLabel, // Custom label style
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                              color: CustomsColros.gray,
-                              width: 1.4,
+                              color: CustomsColros.gray, // Border color
+                              width: 1.4, // Border width
                             ),
-                            borderRadius: BorderRadius.circular(20.0),
+                            borderRadius: BorderRadius.circular(20.0), // Rounded border
                           ),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20.r),
+                            borderRadius: BorderRadius.circular(20.r), // Dynamic rounding
                           ),
                         ),
-                        keyboardType: TextInputType.emailAddress,
+                        keyboardType: TextInputType.emailAddress, // Email-specific keyboard
                         validator: (value) {
+                          // Validation for email input
                           if (value == null || value.isEmpty) {
-                            return 'Please enter your email';
+                            return 'Please enter your email'; // Error for empty field
                           }
                           if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                            return 'Please enter a valid email address';
+                            return 'Please enter a valid email address'; // Error for invalid format
                           }
                           return null;
                         },
                       ),
-                      SizedBox(height: 30.h),
-                      // Button with Cubit Integration
+                      SizedBox(height: 30.h), // Vertical spacing
+                      // BlocConsumer for handling state changes in ForgetPasswordCubit
                       BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
                         listener: (context, state) {
                           if (state is ForgetPasswordSucess) {
+                            // Display success message if email is sent successfully
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content: Text(
                                       'Password reset link sent successfully!')),
                             );
                           } else if (state is ForgetPasswordError) {
+                            // Display error message if an error occurs
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(state.message)),
                             );
@@ -99,38 +108,40 @@ class ForgetPassword extends StatelessWidget {
                         },
                         builder: (context, state) {
                           if (state is ForgetPasswordLoading) {
+                            // Show loading indicator while processing
                             return const Center(
                               child: CircularProgressIndicator(),
                             );
                           }
                           return GestureDetector(
                             onTap: () {
+                              // Validate form and initiate password reset
                               if (_formKey.currentState?.validate() ?? false) {
-                                final email = _emailController.text.trim();
+                                final email = _emailController.text.trim(); // Trim leading/trailing spaces
                                 context
                                     .read<ForgetPasswordCubit>()
-                                    .sendPasswordResetEmail(email);
+                                    .sendPasswordResetEmail(email); // Trigger Cubit method
                               }
                             },
                             child: Container(
-                              width: 190.w,
-                              padding: EdgeInsets.symmetric(vertical: 15.h),
+                              width: 190.w, // Responsive width for the button
+                              padding: EdgeInsets.symmetric(vertical: 15.h), // Padding for better UX
                               decoration: BoxDecoration(
-                                color: CustomsColros.primaryColor,
-                                borderRadius: BorderRadius.circular(15.r),
+                                color: CustomsColros.primaryColor, // Button color
+                                borderRadius: BorderRadius.circular(15.r), // Rounded corners
                                 boxShadow: const [
                                   BoxShadow(
-                                    color: Colors.black26,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 3),
+                                    color: Colors.black26, // Shadow color
+                                    blurRadius: 5, // Shadow blur effect
+                                    offset: Offset(0, 3), // Shadow offset
                                   ),
                                 ],
                               ),
                               child: Center(
                                 child: Text(
-                                  'Submit',
+                                  'Submit', // Button text
                                   style: AppTextStyles.font30blackTitle
-                                      .copyWith(fontSize: 20.sp),
+                                      .copyWith(fontSize: 20.sp), // Custom button style
                                 ),
                               ),
                             ),
