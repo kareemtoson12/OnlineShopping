@@ -10,15 +10,20 @@ class HomeCubit extends Cubit<HomeState> {
 
   final AuthService authService;
 
-  //  categories
-
+  // Fetch categories and products from the backend
   Future<void> fetchCategories() async {
-    emit(HomeCategoriesLoading());
+    emit(HomeCategoriesLoading()); // Emit loading state to indicate the process has started
     try {
+      // Fetch all products from the authentication service
       final products = await authService.getAllProducts();
+
+      // Fetch all categories from the authentication service
       final categories = await authService.getAllCategories();
+
+      // Emit success state with the fetched categories and products
       emit(HomeCategoriesSuccess(categories, products));
     } catch (e) {
+      // Emit error state with an appropriate error message
       emit(HomeCategoriesError('Failed to load categories: $e'));
     }
   }
