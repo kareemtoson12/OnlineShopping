@@ -9,7 +9,6 @@ class SearchBarr extends StatefulWidget {
   @override
   _SearchBarrState createState() => _SearchBarrState();
 }
-
 class _SearchBarrState extends State<SearchBarr> {
   final TextEditingController searchController = TextEditingController();
   late stt.SpeechToText _speech;
@@ -20,7 +19,6 @@ class _SearchBarrState extends State<SearchBarr> {
     super.initState();
     _speech = stt.SpeechToText();
   }
-
   Future<void> _startListening() async {
     if (!_speech.isAvailable) {
       bool available = await _speech.initialize(
@@ -34,20 +32,24 @@ class _SearchBarrState extends State<SearchBarr> {
       );
 
       if (!available) {
+        
         print('Speech recognition not available.');
+        
         return;
       }
     }
 
     setState(() {
+      
       isListening = true;
     });
 
     _speech.listen(onResult: (result) {
       setState(() {
+        
         searchController.text = result.recognizedWords;
+        
       });
-
       if (!_speech.isListening) {
         setState(() {
           isListening = false;
@@ -56,7 +58,9 @@ class _SearchBarrState extends State<SearchBarr> {
           context,
           MaterialPageRoute(
             builder: (context) => SearchResultsScreen(
+              
               searchQuery: result.recognizedWords,
+              
             ),
           ),
         );
