@@ -25,11 +25,11 @@ class SearchResultsScreen extends StatelessWidget {
           .map((doc) => ProductModel.fromDocumentSnapshot(doc))
           .toList();
     } catch (e) {
+      
       print('Error searching products: $e');
       return [];
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +62,6 @@ class SearchResultsScreen extends StatelessWidget {
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(child: Text('No products found.'));
           }
-
           final products = snapshot.data!;
           return Padding(
             padding: const EdgeInsets.all(8.0),
