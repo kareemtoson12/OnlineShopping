@@ -171,7 +171,7 @@ class _CartPageState extends State<CartPage> {
 
         // Clear local cartItems
         setState(() {
-          cartItems = [];
+           cartItems = [];
         });
 
         ScaffoldMessenger.of(context).showSnackBar(
