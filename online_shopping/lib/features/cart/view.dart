@@ -92,6 +92,7 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     double totalPrice = cartItems.fold(
       0,
+      //calculate total price of items in cart
       (sum, item) => sum + (item['price'] * item['quantity']),
     );
 
@@ -186,7 +187,7 @@ class _CartPageState extends State<CartPage> {
         );
       }
     }
-
+//view of cart 
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80.0.dg,
