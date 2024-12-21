@@ -27,7 +27,7 @@ class _CartPageState extends State<CartPage> {
 
   void subscribeToCartUpdates() {
     final user = FirebaseAuth.instance.currentUser;
-
+//verify user login
     if (user != null) {
       cartSubscription = FirebaseFirestore.instance
           .collection('users')
