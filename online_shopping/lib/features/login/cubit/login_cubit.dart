@@ -38,7 +38,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginError(errorMessage)); // Emit error state with a descriptive message
     } catch (e) {
       // Handle general (non-Firebase) errors
-      emit(LoginError('An unknown error occurred. Please try again.'));
+      emit(LoginError('unknown error occurred. Please try again.'));
     }
   }
 }
