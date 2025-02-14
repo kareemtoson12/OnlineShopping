@@ -1,6 +1,6 @@
 Online Shopping Application
 The Online Shopping Application provides a seamless platform for customers to explore and purchase products while equipping admins with robust tools for inventory management and sales analysis.
-![Image](https://github.com/user-attachments/assets/20d25bb6-2b79-4011-aeca-65fc9d491842)
+![Image](https://github.com/user-attachments/assets/e926ff6e-9509-4de5-8781-f7d76d6d71b7)
 🌟 Key Features<br>
 👤 Customer Features<br>
 Sign-Up & Login:<br>
